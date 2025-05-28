@@ -6,3 +6,4 @@ dist
 out
 npm-debug.log*
 yarn-debug.log*
+gitquick.sh
