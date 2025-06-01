@@ -301,7 +301,7 @@ export default function Home() {
                     Corso Base
                   </h3>
                   <div className="mb-6">
-                    <span className="text-4xl font-bold text-blue-600 dark:text-blue-400">€79</span>
+                    <span className="text-4xl font-bold text-blue-600 dark:text-blue-400">€49</span>
                     <span className="text-slate-600 dark:text-slate-300 ml-2">una tantum</span>
                   </div>
                   <div className="space-y-4 mb-8">
@@ -324,7 +324,7 @@ export default function Home() {
                       <span className="text-slate-700 dark:text-slate-300">5 ore di video lezioni</span>
                     </div>
                   </div>
-                  <PurchaseButton courseType="BASE" price="€79" className="w-full">
+                  <PurchaseButton courseType="BASE" price="€49" className="w-full">
                     Inizia Ora
                   </PurchaseButton>
                 </div>

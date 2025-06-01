@@ -25,7 +25,7 @@ export const COURSES = {
   BASE: {
     id: 'corso-base',
     name: 'Corso Base - Metacognizione nel Prompt',
-    price: 7900, // €79.00 in cents
+    price: 4900, // €49.00 in cents
     currency: 'eur',
     description: 'Fondamenti del prompt engineering e tecniche base di metacognizione'
   },
