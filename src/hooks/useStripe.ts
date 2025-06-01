@@ -25,6 +25,12 @@ export function useStripe(): UseStripeReturn {
         throw new Error('Devi essere autenticato per procedere con l\'acquisto');
       }
 
+      if (!user.email) {
+        throw new Error('Email utente non disponibile');
+      }
+
+      console.log('Iniziando checkout per:', { courseType, userEmail: user.email });
+
       // Crea la sessione di checkout
       const response = await fetch('/api/create-checkout-session', {
         method: 'POST',
@@ -37,24 +43,38 @@ export function useStripe(): UseStripeReturn {
         }),
       });
 
+      console.log('Response status:', response.status);
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Errore durante la creazione del checkout');
+        let errorMessage = 'Errore durante la creazione del checkout';
+        
+        try {
+          const errorData = await response.json();
+          console.error('Errore API:', errorData);
+          errorMessage = errorData.error || errorMessage;
+        } catch (parseError) {
+          console.error('Errore parsing response:', parseError);
+          errorMessage = `Errore HTTP ${response.status}`;
+        }
+        
+        throw new Error(errorMessage);
       }
 
-      const { url } = await response.json();
+      const data = await response.json();
+      console.log('Checkout session data:', data);
       
-      if (!url) {
-        throw new Error('URL di checkout non ricevuto');
+      if (!data.url) {
+        throw new Error('URL di checkout non ricevuto dal server');
       }
 
       // Reindirizza alla pagina di checkout Stripe
-      window.location.href = url;
+      console.log('Reindirizzando a:', data.url);
+      window.location.href = data.url;
 
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Errore sconosciuto';
-      setError(errorMessage);
+      const errorMessage = err instanceof Error ? err.message : 'Errore sconosciuto durante il checkout';
       console.error('Errore checkout:', err);
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }

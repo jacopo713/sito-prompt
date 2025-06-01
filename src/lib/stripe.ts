@@ -20,33 +20,37 @@ export const getStripe = async () => {
   return loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 };
 
-// Product configurations
+// Product configurations with Stripe Price IDs
 export const COURSES = {
   BASE: {
     id: 'corso-base',
     name: 'Corso Base - Metacognizione nel Prompt',
-    price: 4900, // €49.00 in cents
+    priceId: process.env.STRIPE_PRICE_BASE || 'price_1RRHuIApK1iq6ElBlNYHVCsf', // €49.00
+    price: 4900, // for display purposes
     currency: 'eur',
     description: 'Fondamenti del prompt engineering e tecniche base di metacognizione'
   },
   MEDIUM: {
     id: 'corso-medio',
     name: 'Corso Medio - Metacognizione Avanzata',
-    price: 14900, // €149.00 in cents
+    priceId: process.env.STRIPE_PRICE_MEDIUM || 'price_1RRHuIApK1iq6ElBlNYHVCsg', // €149.00
+    price: 14900, // for display purposes
     currency: 'eur',
     description: 'Strategie avanzate di riflessione e 12 ore di contenuti pratici'
   },
   ADVANCED: {
     id: 'corso-avanzato',
     name: 'Corso Avanzato - Pensiero Critico',
-    price: 24900, // €249.00 in cents
+    priceId: process.env.STRIPE_PRICE_ADVANCED || 'price_1RRHuIApK1iq6ElBlNYHVCsh', // €249.00
+    price: 24900, // for display purposes
     currency: 'eur',
     description: 'Metodologie di pensiero critico e 20 ore + sessioni 1:1'
   },
   COACHING: {
     id: 'coaching-session',
     name: 'Sessione di Live Coaching',
-    price: 8900, // €89.00 in cents
+    priceId: process.env.STRIPE_PRICE_COACHING || 'price_1RRHuIApK1iq6ElBlNYHVCsi', // €89.00
+    price: 8900, // for display purposes
     currency: 'eur',
     description: 'Sessione 1:1 personalizzata da 60 minuti con Jacopo'
   }
