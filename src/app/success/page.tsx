@@ -114,6 +114,7 @@ export default function SuccessPage() {
               Torna alla Home
             </Link>
             
+            
               href="mailto:info@metacognizione.it"
               className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
             >
