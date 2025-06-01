@@ -1,5 +1,6 @@
 import Image from "next/image";
 import AuthButton from "@/components/AuthButton";
+import PurchaseButton from "@/components/PurchaseButton";
 
 export default function Home() {
   return (
@@ -244,12 +245,9 @@ export default function Home() {
                       <div className="text-2xl font-bold">€89</div>
                       <div className="text-blue-200 text-sm">sessione da 60 min</div>
                     </div>
-                    <button className="bg-white hover:bg-gray-100 text-blue-600 px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105 flex items-center justify-center group">
+                    <PurchaseButton courseType="COACHING" price="€89" variant="secondary" className="text-white border-white hover:bg-white hover:text-blue-600">
                       Prenota Sessione
-                      <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
-                    </button>
+                    </PurchaseButton>
                   </div>
                 </div>
 
@@ -326,12 +324,9 @@ export default function Home() {
                       <span className="text-slate-700 dark:text-slate-300">5 ore di video lezioni</span>
                     </div>
                   </div>
-                  <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-medium transition-all transform hover:scale-105 group">
+                  <PurchaseButton courseType="BASE" price="€79" className="w-full">
                     Inizia Ora
-                    <svg className="w-4 h-4 ml-2 inline group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </button>
+                  </PurchaseButton>
                 </div>
               </div>
             </div>
@@ -372,12 +367,9 @@ export default function Home() {
                       <span className="text-slate-700 dark:text-slate-300">12 ore di contenuti pratici</span>
                     </div>
                   </div>
-                  <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-medium transition-all transform hover:scale-105 group">
+                  <PurchaseButton courseType="MEDIUM" price="€149" className="w-full">
                     Scegli Medio
-                    <svg className="w-4 h-4 ml-2 inline group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </button>
+                  </PurchaseButton>
                 </div>
               </div>
             </div>
@@ -413,12 +405,9 @@ export default function Home() {
                       <span className="text-slate-700 dark:text-slate-300">20 ore + sessioni 1:1</span>
                     </div>
                   </div>
-                  <button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white py-3 px-6 rounded-lg font-medium transition-all transform hover:scale-105 group">
+                  <PurchaseButton courseType="ADVANCED" price="€249" variant="premium" className="w-full">
                     Diventa Esperto
-                    <svg className="w-4 h-4 ml-2 inline group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </button>
+                  </PurchaseButton>
                 </div>
               </div>
             </div>
