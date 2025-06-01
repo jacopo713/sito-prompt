@@ -1,4 +1,5 @@
 import Image from "next/image";
+import AuthButton from "@/components/AuthButton";
 
 export default function Home() {
   return (
@@ -26,11 +27,9 @@ export default function Home() {
               </div>
             </div>
             
-            {/* Login Button */}
+            {/* Auth Button */}
             <div className="flex items-center space-x-4">
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
-                Login
-              </button>
+              <AuthButton />
             </div>
             
             {/* Mobile menu button */}
