@@ -5,13 +5,14 @@ export const courseBase: Course = {
   title: 'Corso Base - Metacognizione nel Prompt',
   description: 'Fondamenti del prompt engineering attraverso tecniche di metacognizione avanzata',
   level: 'BASE',
-  totalDuration: '5 ore',
+  totalDuration: '5 ore 30 min', // Updated to reflect new module
   learningObjectives: [
     'Comprendere i principi della metacognizione applicata al prompt engineering',
     'Sviluppare consapevolezza del proprio processo di pensiero',
     'Padroneggiare le tecniche base di prompting efficace',
     'Imparare a calibrare e ottimizzare i propri prompt',
-    'Creare un rapporto simbiotico con l\'AI'
+    'Creare un rapporto simbiotico con l\'AI',
+    'Valutare la propria comprensione dei concetti chiave del corso'
   ],
   modules: [
     {
@@ -63,82 +64,162 @@ La differenza è evidente: il secondo studente **guida attivamente** il suo proc
         },
         {
           type: 'text',
+          title: 'Uso Passivo vs Uso Proattivo dell\'Intelligenza Artificiale',
+          content: `Prima di applicare la metacognizione all'AI, è fondamentale comprendere la differenza tra **uso passivo** e **uso proattivo** dell'intelligenza artificiale.
+
+**USO PASSIVO dell'AI:**
+- Accetti le risposte senza questionarle
+- Fai domande generiche e superficiali
+- Non rifletti sul processo di interazione
+- Usi l'AI come un motore di ricerca avanzato
+- Subisci l'output invece di guidarlo
+
+**USO PROATTIVO dell'AI:**
+- Questionari attivamente le risposte ricevute
+- Strutturi domande specifiche e contestualizzate
+- Rifletti continuamente su come migliorare l'interazione
+- Usi l'AI come partner di pensiero
+- Guidi strategicamente il processo di co-creazione`
+        },
+        {
+          type: 'example',
+          title: 'Uso Passivo vs Uso Proattivo in Pratica',
+          content: `**Scenario:** Devi scrivere una email importante a un cliente
+
+**APPROCCIO PASSIVO:**
+"Scrivi un'email per un cliente"
+[Ricevi la risposta]
+[La copi e incolli senza modifiche]
+
+**APPROCCIO PROATTIVO:**
+"Devo scrivere un'email a un cliente enterprise che ha espresso dubbi sul nostro servizio. L'obiettivo è rassicurarlo mantenendo un tono professionale ma empatico. Prima di iniziare: quali informazioni aggiuntive potrebbero servire per personalizzare al meglio questo messaggio?"
+[Ricevi la risposta]
+"Ottimo, ora scrivi l'email includendo questi elementi specifici..."
+[Analizzi il risultato]
+"Il tono mi sembra giusto, ma la parte finale potrebbe essere più actionable. Come possiamo renderla più specifica?"`
+        },
+        {
+          type: 'text',
           title: 'Il Ponte: Dalla Psicologia al Prompt Engineering',
           content: `Ora, **trasferisci questo concetto all'AI**. Quando interagisci con un'intelligenza artificiale, stai essenzialmente "pensando insieme" a un sistema estremamente potente.
 
-La maggior parte delle persone usa l'AI come un motore di ricerca avanzato:
+La maggior parte delle persone usa l'AI in modo **passivo**:
 - Fa una domanda
 - Riceve una risposta  
 - Accetta il risultato senza riflettere
 
-Ma cosa succederebbe se applicassi la **metacognizione** a questo processo?`
+Ma cosa succederebbe se applicassi la **metacognizione** e un approccio **proattivo** a questo processo?`
         },
         {
           type: 'text',
-          title: 'Metacognizione nel Prompt: La Rivoluzione',
-          content: `Il **prompt engineering metacognitivo** significa essere consapevoli e riflessivi su:
+          title: 'Metacognizione nel Prompt: La Rivoluzione Proattiva',
+          content: `Il **prompt engineering metacognitivo** significa essere **proattivamente** consapevoli e riflessivi su:
 
 **🎯 Il tuo obiettivo:** "Cosa sto realmente cercando di ottenere?"
 **🧠 Il tuo processo mentale:** "Come sto strutturando questa richiesta?"
 **🔄 L'interazione:** "Come sta rispondendo l'AI e perché?"
 **⚡ L'ottimizzazione:** "Come posso migliorare questa conversazione?"
 
-Non stai più semplicemente "usando" l'AI - stai **co-pensando** con essa.`
+Non stai più semplicemente "usando" l'AI in modo passivo - stai **co-pensando proattivamente** con essa.`
+        },
+        {
+          type: 'text',
+          title: 'Strategie di Prompting Proattivo: Creativo vs Funzionale',
+          content: `Quando usi l'AI in modo proattivo, puoi adottare diverse strategie a seconda del tuo obiettivo. Ecco due approcci comuni:
+
+**1. Approccio Creativo Globale (Top-Down): Ideale per la generazione di bozze iniziali complesse (es. un tema grafico).**
+   - **Fase 1: Richiesta Iniziale Ampia.** Chiedi all'AI di generare una bozza completa. Ad esempio: *"Crea un tema grafico per un sito web di e-commerce di moda sostenibile, stile minimalista, elegante, colori naturali. Includi layout per homepage, pagina prodotto, blog."*
+   - **Fase 2: Anteprima e Valutazione.** Analizza la proposta generale. *"Ok, l'impostazione generale mi piace, ma i colori sono troppo scuri e la hero section è poco impattante."*
+   - **Fase 3: Rifinitura Dettagliata.** Procedi con modifiche specifiche pezzo per pezzo. *"Modifica i colori primari in #F5F5DC e secondari in #A8B8A0. Rendi la hero section più visiva con un'immagine full-width e un claim più breve."*
+   - **Vantaggio:** Ottieni rapidamente una visione d'insieme e iteri su una base concreta.
+   - **Svantaggio:** La prima bozza potrebbe essere lontana dall'ideale.
+
+**2. Approccio Funzionale Incrementale (Bottom-Up): Ottimo per sviluppare funzionalità complesse e interconnesse passo-passo.**
+   - **Scenario Complesso:** Integrare un sistema di pagamento Stripe per un prodotto, collegandolo all'autenticazione utenti Firebase per tracciare gli acquisti.
+   - **Motivazione all'Approccio Step-by-Step:** Un prompt unico come *"Crea l'integrazione completa di Firebase Auth e Stripe Payments per il mio e-commerce Next.js, gestendo chiavi API, webhook, e salvataggio acquisti nel database utente"* sarebbe estremamente complesso per l'AI e difficilmente produrrebbe un risultato funzionante e ottimale. Ci sono troppe variabili, dipendenze tra file (es. \\\`src/lib/firebase.ts\\\`, \\\`src/hooks/useAuth.ts\\\`, \\\`src/app/api/create-checkout-session/route.ts\\\`, \\\`src/app/api/stripe/webhook/route.ts\\\`, \\\`src/components/PurchaseButton.tsx\\\`) e configurazioni specifiche (chiavi API, variabili d'ambiente).
+
+   - **Fase 1: Configurazione Autenticazione Utente (Firebase).**
+     - **Prompt Iniziale:** *"Aiutami a configurare l'autenticazione Google con Firebase nel mio progetto Next.js. Iniziamo creando il file di configurazione Firebase (\\\`src/lib/firebase.ts\\\`) con le mie variabili d'ambiente. Poi, implementiamo le funzioni \`signInWithGoogle\` e \`signOutUser\`."*
+     - **Prompt di Follow-up:** *"Ora creiamo un hook \`useAuth\` (\\\`src/hooks/useAuth.ts\\\`) per gestire lo stato dell'utente globalmente e un componente \`AuthButton\` (\\\`src/components/AuthButton.tsx\\\`) per visualizzare lo stato di login/logout e permettere le azioni."*
+
+   - **Fase 2: Creazione Sessione di Checkout (Stripe API Route).**
+     - **Prompt Iniziale:** *"Passiamo a Stripe. Devo creare una API route Next.js (\\\`src/app/api/create-checkout-session/route.ts\\\`) che generi una sessione di checkout Stripe. Questa route deve ricevere \`courseType\` e \`userEmail\` (dall'utente autenticato) dal client, recuperare il \`priceId\` corretto da una costante \`COURSES\` definita in \\\`src/lib/stripe.ts\\\`, e includere l'email dell'utente e il tipo di corso nei metadati di Stripe. Assicurati di gestire correttamente le chiavi API Stripe."*
+     - **Prompt di Follow-up:** *"Nel frontend, modifica il componente \`PurchaseButton\` (\\\`src/components/PurchaseButton.tsx\\\`) per: 1. Usare l'hook \`useAuth\` per verificare se l'utente è loggato. 2. Se non loggato, mostrare un messaggio di errore. 3. Se loggato, chiamare la nostra API route \`/api/create-checkout-session\` con \`courseType\` e \`user.email\`. 4. Reindirizzare l'utente all'URL di checkout fornito da Stripe."*
+
+   - **Fase 3: Gestione Conferma Acquisto (Stripe Webhook).**
+     - **Prompt Iniziale:** *"Ora devo gestire la conferma del pagamento. Crea una API route per il webhook Stripe (\\\`src/app/api/stripe/webhook/route.ts\\\`) che ascolti l'evento \`checkout.session.completed\`. Deve verificare la firma del webhook (usando \`STRIPE_WEBHOOK_SECRET\`) e, in caso di successo, estrarre \`userEmail\` e \`courseType\` dai metadati della sessione."*
+     - **Prompt di Follow-up (logica applicativa):** *"In questa route webhook, dopo aver verificato l'evento e estratto i metadati, aggiungeremo la logica per salvare i dettagli dell'acquisto (es. corso acquistato, data, ID sessione Stripe) nel database Firestore dell'utente (identificato da \`userEmail\`). Questo permetterà di sbloccare l'accesso al corso per l'utente."*
+
+   - **Vantaggio Chiave:** Questo approccio scompone un'attività complessa e multi-file in parti gestibili. Ad ogni step, si fornisce un contesto chiaro all'AI, si possono testare le funzionalità singolarmente e si riduce drasticamente la probabilità di errori o output subottimali. L'AI agisce come un pair programmer focalizzato su un compito specifico alla volta.
+   - **Mantenimento del Contesto:** È cruciale, durante questi passaggi, fornire all'AI i file rilevanti o aggiornarla sullo stato attuale del codice per garantire che i nuovi pezzi si integrino correttamente. Ad esempio, prima di modificare \\\`PurchaseButton\\\`, potresti fornire all'AI il contenuto aggiornato di \\\`useAuth\\\` e della route \\\`create-checkout-session\\\`. Comunicare quali file sono stati modificati e come, aiuta l'AI a "ricordare" lo stato del progetto.
+
+**Metacognizione in Azione:**
+La scelta tra questi approcci è una decisione metacognitiva. Chiediti:
+- *"Qual è la natura del mio compito? Generazione o modifica? È un task isolato o parte di un sistema più grande?"*
+- *"Ho bisogno di una visione d'insieme immediata o preferisco un controllo granulare sulla costruzione di ogni componente?"*
+- *"Quale strategia mi permetterà di interagire più efficacemente con l'AI per *questo specifico obiettivo*, minimizzando ambiguità e massimizzando la qualità dell'output?"*
+
+Essere proattivi significa anche scegliere la strategia di interazione più adatta e guidare l'AI attraverso la complessità, mantenendo il controllo del processo di sviluppo.`
+        },
+        {
+          type: 'warning',
+          title: 'Il Pericolo dell\'Uso Passivo',
+          content: `⚠️ **Attenzione al rischio passivo**: L'uso passivo dell'AI può portare a:
+- Dipendenza eccessiva senza sviluppo delle proprie capacità
+- Accettazione di output mediocri o inappropriati
+- Perdita di pensiero critico
+- Risultati generici e poco personalizzati
+- Stagnazione intellettuale
+
+L'approccio **proattivo** e **metacognitivo** ti mantiene al comando del processo.`
         },
         {
           type: 'example',
-          title: 'Approccio Normale vs Approccio Metacognitivo',
-          content: `**Approccio normale:**
+          title: 'Approccio Passivo vs Approccio Proattivo Metacognitivo',
+          content: `**Approccio passivo:**
 "Scrivi un piano di marketing per la mia startup"
+[Accetta quello che riceve senza questionare]
 
-**Approccio metacognitivo:**
-"Voglio sviluppare un piano di marketing, ma prima voglio essere sicuro di strutturare bene questa richiesta. Quali informazioni ha bisogno l'AI per darmi un output davvero utile? Probabilmente dovrei specificare: il settore, il target, il budget, i miei obiettivi specifici... 
+**Approccio proattivo metacognitivo:**
+"Voglio sviluppare un piano di marketing, ma prima voglio essere sicuro di strutturare bene questa richiesta in modo proattivo. Quali informazioni ha bisogno l'AI per darmi un output davvero utile? Probabilmente dovrei specificare: il settore, il target, il budget, i miei obiettivi specifici... 
 
 Ora provo con: 'Aiutami a creare un piano di marketing per una startup nel settore fintech, target giovani professionisti 25-35 anni, budget mensile 5k€, obiettivo principale acquisire 1000 utenti nei primi 3 mesi. Prima di iniziare, dimmi: ci sono altri dettagli cruciali che dovrei condividere per ottimizzare questo piano?'"
 
-Vedi la differenza? Il secondo approccio **attiva il pensiero critico** sia tuo che dell'AI.`
+Vedi la differenza? Il secondo approccio **attiva proattivamente il pensiero critico** sia tuo che dell'AI.`
         },
         {
           type: 'text',
           title: 'I 4 Pilastri della Metodologia CORE',
           content: `In questo corso svilupperai un sistema metacognitivo strutturato attraverso i **4 Pilastri CORE**:
 
-**C** - **Context Mastery**: Gestione consapevole e strategica del contesto
-**O** - **Optimization Thinking**: Mentalità di miglioramento continuo  
+**C** - **Context Mastery**: Gestione proattiva e strategica del contesto
+**O** - **Optimization Thinking**: Mentalità di miglioramento continuo e proattivo
 **R** - **Reflexive Prompting**: Prompting riflessivo e auto-correttivo
-**E** - **Enhancement Symbiosis**: Simbiosi di potenziamento reciproco
+**E** - **Enhancement Symbiosis**: Simbiosi di potenziamento reciproco e proattivo
 
-Ogni pilastro rappresenta una dimensione della tua evoluzione cognitiva nell'interazione con l'AI.`
+Ogni pilastro rappresenta una dimensione della tua evoluzione cognitiva nell'interazione proattiva con l'AI.`
+        },
+        {
+          type: 'tip',
+          title: 'Il Test del Proattivo',
+          content: `🧪 **Per verificare se stai usando l'AI proattivamente, chiediti:**
+- Sto guidando io la conversazione o la sto subendo?
+- Sto questionando e migliorando le risposte che ricevo?
+- Sto fornendo contesto strategico o solo domande superficiali?
+- Sto imparando qualcosa di nuovo su come interagire meglio?
+- Sto co-creando valore o solo consumando output?
+
+Se rispondi "sì" alla maggior parte delle domande, sei sulla strada giusta!`
         },
         {
           type: 'warning',
           title: 'Un Cambiamento di Paradigma',
           content: `⚠️ **Attenzione**: Questo approccio richiede un cambiamento mentale profondo. Non stai imparando "trucchi" o "formule magiche" per i prompt. 
 
-Stai sviluppando una **nuova forma di intelligenza** - la capacità di pensare efficacemente in partnership con l'AI. È più impegnativo, ma i risultati sono trasformativi.`
-        }
-      ],
-      exercises: [
-        {
-          id: 'ex-1-1',
-          question: 'Descrivi un momento recente in cui hai usato la metacognizione nella vita quotidiana (anche senza saperlo). Cosa ti ha fatto "fermare e riflettere" sul tuo processo mentale?',
-          type: 'text',
-          explanation: 'Questo esercizio ti aiuta a riconoscere che già usi la metacognizione, preparandoti ad applicarla consapevolmente ai prompt.'
-        },
-        {
-          id: 'ex-1-2',
-          question: 'Qual è la differenza principale tra usare l\'AI come "strumento" e sviluppare una "simbiosi cognitiva" con essa?',
-          type: 'multiple-choice',
-          options: [
-            'Non c\'è differenza, sono la stessa cosa',
-            'La simbiosi significa essere consapevoli e riflessivi sul processo di interazione',
-            'Lo strumento è più efficace della simbiosi',
-            'La simbiosi è solo teoria, lo strumento è pratica'
-          ],
-          correctAnswer: 1,
-          explanation: 'La simbiosi cognitiva trasforma l\'AI da semplice strumento a partner di pensiero, richiedendo consapevolezza metacognitiva del processo.'
+Stai sviluppando una **nuova forma di intelligenza proattiva** - la capacità di pensare efficacemente in partnership con l'AI. È più impegnativo dell'uso passivo, ma i risultati sono trasformativi.`
         }
       ]
+      // Exercises removed from Modulo 1
     },
     {
       id: 'modulo-2', 
@@ -156,8 +237,7 @@ Queste dimensioni - conosciute come **"Big Five"** - si riflettono direttamente 
         {
           type: 'tip',
           title: 'Autoanalisi Preliminare',
-          content: `🧠 **Prima di continuare, rifletti onestamente:** 
-- Come affronti naturalmente un problema nuovo?
+          content: `🧠 **Prima di continuare, rifletti onestamente:** - Come affronti naturalmente un problema nuovo?
 - Preferisci esplorare molte possibilità o focalizzarti su una soluzione?
 - Ti piace seguire procedure consolidate o inventare approcci originali?
 - Lavori meglio con indicazioni dettagliate o linee guida generali?
@@ -179,8 +259,7 @@ Le tue risposte riveleranno pattern che si riflettono nei tuoi prompt.`
 **Punti di forza:** Efficienza, chiarezza, praticità immediata
 **Sfide:** Può perdere sfumature, contesto limitato, creatività ridotta
 
-**Prompt tipico:** 
-"Fammi un riassunto esecutivo di questo documento in 3 punti chiave"
+**Prompt tipico:** "Fammi un riassunto esecutivo di questo documento in 3 punti chiave"
 
 **Pattern di miglioramento:**
 - Aggiungi una domanda di controllo: "Ho fornito abbastanza contesto?"
@@ -305,35 +384,8 @@ Il vero potere emerge quando:
 
 **Per tutti:** Inizia ogni sessione importante chiedendoti: "Che stile è più adatto a questo obiettivo specifico?"`
         }
-      ],
-      exercises: [
-        {
-          id: 'ex-2-1',
-          question: 'Scrivi un prompt che useresti normalmente per chiedere aiuto nella pianificazione di un progetto. Poi analizza: che stile di prompting riflette? Quali elementi del tuo profilo psicologico riconosci?',
-          type: 'text',
-          explanation: 'Questo esercizio ti aiuta a prendere consapevolezza del tuo stile naturale di prompting e delle sue radici psicologiche.'
-        },
-        {
-          id: 'ex-2-2',
-          question: 'Basandoti sull\'assessment, qual è il tuo stile di prompting predominante?',
-          type: 'multiple-choice',
-          options: [
-            'Esecutore - Efficienza e risultati rapidi',
-            'Esploratore - Curiosità e possibilità multiple', 
-            'Sistematico - Struttura e metodologia',
-            'Visionario - Creatività e innovazione',
-            'Mix equilibrato di più stili'
-          ],
-          correctAnswer: 4, // Non c'è una risposta "corretta" universale
-          explanation: 'Ogni stile ha i suoi punti di forza. L\'importante è riconoscere il tuo pattern naturale per poterlo sviluppare metacognitivamente.'
-        },
-        {
-          id: 'ex-2-3',
-          question: 'Riscrivi il prompt dell\'esercizio 1 integrando elementi di consapevolezza metacognitiva specifici per il tuo stile identificato.',
-          type: 'text',
-          explanation: 'Questo esercizio ti fa praticare l\'applicazione immediata della consapevolezza del tuo stile per migliorare i prompt.'
-        }
       ]
+      // Exercises removed from Modulo 2
     },
     {
       id: 'modulo-3',
@@ -417,6 +469,7 @@ La presentazione deve assolutamente riflettere professionalità e competenza - �
 💡 **Risultato:** Una risposta che bilancia perfettamente professionalità, dati concreti e storytelling coinvolgente, senza bisogno di etichette artificiali.`
         }
       ]
+      // Exercises removed from Modulo 3
     },
     {
       id: 'modulo-4',
@@ -458,6 +511,7 @@ Questo ciclo trasforma ogni interazione in un'opportunità di apprendimento.`
 - **Completezza:** Copre tutti gli aspetti rilevanti?`
         }
       ]
+      // Exercises removed from Modulo 4
     },
     {
       id: 'modulo-5',
@@ -488,6 +542,96 @@ Questo prompt:
 - Riconosce i punti di forza dell'AI
 - Valorizza la tua esperienza umana
 - Crea uno spazio di co-creazione`
+        }
+      ]
+      // Exercises removed from Modulo 5
+    },
+    {
+      id: 'modulo-6',
+      title: 'Modulo 6 - Quiz Finale di Autovalutazione',
+      description: 'Valuta la tua comprensione dei concetti chiave del corso attraverso questo quiz finale. È richiesto un punteggio minimo per considerare il corso completato con successo.',
+      duration: '30 min',
+      content: [
+        {
+          type: 'text',
+          title: 'Istruzioni per il Quiz Finale',
+          content: `Questo quiz finale è progettato per aiutarti a consolidare e valutare la tua comprensione dei principi fondamentali del prompt engineering metacognitivo.
+
+**Dettagli del Quiz:**
+- Il quiz consiste in 5 domande a scelta multipla.
+- Ogni domanda copre argomenti trattati nei moduli precedenti.
+- Hai un tentativo per rispondere a ciascuna domanda.
+- Per superare il quiz e completare il corso, devi rispondere correttamente ad **almeno 4 domande su 5 (80%)**.
+
+Leggi attentamente ogni domanda e le relative opzioni prima di selezionare la tua risposta. In bocca al lupo!
+`
+        }
+      ],
+      exercises: [
+        {
+          id: 'quiz-1',
+          question: 'Qual è la definizione più accurata di "metacognizione" nel contesto del prompt engineering?',
+          type: 'multiple-choice',
+          options: [
+            'La capacità di scrivere prompt molto lunghi e dettagliati.',
+            'Essere consapevoli e riflessivi sul proprio processo di pensiero, sugli obiettivi e sull\'interazione con l\'AI durante il prompting.',
+            'L\'uso di software specializzato per generare prompt automaticamente.',
+            'La memorizzazione di una vasta lista di comandi per l\'AI.'
+          ],
+          correctAnswer: 1,
+          explanation: 'La metacognizione nel prompt engineering implica una riflessione attiva sul proprio processo di interazione con l\'AI per migliorarlo (Modulo 1).'
+        },
+        {
+          id: 'quiz-2',
+          question: 'Quale delle seguenti affermazioni descrive meglio un "uso proattivo" dell\'AI?',
+          type: 'multiple-choice',
+          options: [
+            'Accettare la prima risposta dell\'AI senza ulteriori domande.',
+            'Fare domande generiche e aspettarsi che l\'AI capisca tutto il contesto.',
+            'Guidare strategicamente l\'interazione, questionare le risposte e usare l\'AI come partner di pensiero.',
+            'Usare l\'AI solo per compiti semplici e ripetitivi.'
+          ],
+          correctAnswer: 2,
+          explanation: 'L\'uso proattivo implica guidare l\'interazione, fornire contesto, questionare e co-creare con l\'AI (Modulo 1).'
+        },
+        {
+          id: 'quiz-3',
+          question: 'Un utente che preferisce prompt concisi, va dritto al punto ed è orientato all\'azione, probabilmente riflette quale Archetipo del Prompting Metacognitivo?',
+          type: 'multiple-choice',
+          options: [
+            'L\'Esploratore',
+            'Il Visionario',
+            'Il Sistematico',
+            'L\'Esecutore'
+          ],
+          correctAnswer: 3,
+          explanation: 'L\'Esecutore è caratterizzato da efficienza, chiarezza e un approccio diretto e orientato ai risultati (Modulo 2).'
+        },
+        {
+          id: 'quiz-4',
+          question: 'Quando l\'AI tende a completare uno schema o una struttura che le fornisci nel prompt (es. una lista numerata iniziata), quale pattern fondamentale sta sfruttando?',
+          type: 'multiple-choice',
+          options: [
+            'Context Dependency',
+            'Pattern Completion',
+            'Priming Effect',
+            'Semantic Clustering'
+          ],
+          correctAnswer: 1,
+          explanation: 'Il Pattern Completion è la tendenza dell\'AI a completare schemi e strutture riconosciute nel prompt (Modulo 3).'
+        },
+        {
+          id: 'quiz-5',
+          question: 'Il ciclo di calibrazione "ARIA" per ottimizzare i prompt è un acronimo che sta per:',
+          type: 'multiple-choice',
+          options: [
+            'Ask, Review, Implement, Assess',
+            'Analyze, Reflect, Iterate, Adopt',
+            'Action, Result, Improve, Augment',
+            'Aim, Refine, Instruct, Achieve'
+          ],
+          correctAnswer: 1,
+          explanation: 'ARIA sta per Analyze (Analizza la risposta), Reflect (Rifletti), Iterate (Modifica il prompt), Adopt (Adotta la versione migliorata) (Modulo 4).'
         }
       ]
     }
