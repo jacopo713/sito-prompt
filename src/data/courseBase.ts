@@ -5,14 +5,15 @@ export const courseBase: Course = {
   title: 'Corso Base - Metacognizione nel Prompt',
   description: 'Fondamenti del prompt engineering attraverso tecniche di metacognizione avanzata',
   level: 'BASE',
-  totalDuration: '5 ore 30 min', // Updated to reflect new module
+  totalDuration: '7 ore 45 min', // Updated to reflect new module
   learningObjectives: [
     'Comprendere i principi della metacognizione applicata al prompt engineering',
     'Sviluppare consapevolezza del proprio processo di pensiero',
     'Padroneggiare le tecniche base di prompting efficace',
     'Imparare a calibrare e ottimizzare i propri prompt',
     'Creare un rapporto simbiotico con l\'AI',
-    'Valutare la propria comprensione dei concetti chiave del corso'
+    'Valutare la propria comprensione dei concetti chiave del corso',
+    'Sviluppare consapevolezza delle proprie abilità cognitive per ottimizzare l\'interazione con l\'AI' // New Objective
   ],
   modules: [
     {
@@ -632,6 +633,154 @@ Leggi attentamente ogni domanda e le relative opzioni prima di selezionare la tu
           ],
           correctAnswer: 1,
           explanation: 'ARIA sta per Analyze (Analizza la risposta), Reflect (Rifletti), Iterate (Modifica il prompt), Adopt (Adotta la versione migliorata) (Modulo 4).'
+        }
+      ]
+    },
+    { // New Module 7
+      id: 'modulo-7',
+      title: 'Consapevolezza Cognitiva Avanzata nel Prompting',
+      description: 'Diventa consapevole di come le tue abilità cognitive chiave (attenzione, memoria, pianificazione, flessibilità) influenzano la creazione dei prompt e impara a modularle per un\'efficacia superiore.',
+      duration: '75 min',
+      content: [
+        {
+          type: 'text',
+          title: 'Introduzione: Il Cervello Dietro il Prompt',
+          content: `Hai mai pensato a quali **superpoteri della tua mente** entrano in gioco quando scrivi un prompt efficace? Non si tratta solo di "digitare parole", ma di un sofisticato balletto di abilità cognitive. 
+          
+Questo modulo ti guiderà a riconoscere e potenziare queste abilità, ispirandoci alla comprensione dettagliata delle funzioni cognitive come quelle esplorate da strumenti di valutazione quali il **CogniFit CAB (Cognitive Assessment Battery)**. Comprendere come usi attenzione, memoria, ragionamento e flessibilità ti darà un controllo senza precedenti sulla qualità dei tuoi prompt.`
+        },
+        {
+          type: 'text',
+          title: '1. Attenzione: Il Faro della Tua Mente',
+          content: `L'**attenzione** è la capacità di concentrare le tue risorse mentali su uno stimolo specifico (attenzione focalizzata) o più stimoli contemporaneamente (attenzione divisa), ignorando le distrazioni (attenzione selettiva).
+
+**Nel Prompting:**
+- **Attenzione Focalizzata:** Mantenere chiaro l'obiettivo del prompt mentre lo si formula, senza perdersi in dettagli irrilevanti.
+- **Attenzione Selettiva:** Filtrare il "rumore" nelle risposte dell'AI, individuando le informazioni cruciali.
+- **Attenzione Divisa:** Gestire contemporaneamente la costruzione del prompt, l'obiettivo finale, e l'anticipazione della risposta dell'AI.
+
+**Esempio:** Stai cercando di generare un'immagine specifica. L'AI ti propone varianti interessanti ma non pertinenti. L'attenzione selettiva ti aiuta a ignorare le distrazioni e a rifocalizzare l'AI sull'obiettivo originale.`
+        },
+        {
+          type: 'tip',
+          title: 'Check Metacognitivo sull\'Attenzione',
+          content: `🤔 Domandati:
+- "Sono completamente focalizzato sul risultato che voglio ottenere o la mia mente sta divagando?"
+- "Sto attivamente filtrando le informazioni irrilevanti dall'AI o mi lascio trasportare da ogni sua proposta?"
+- "Riesco a mantenere la concentrazione per tutto il processo di iterazione del prompt?"`
+        },
+        {
+          type: 'text',
+          title: '2. Memoria di Lavoro: Il Tuo Blocco Appunti Mentale',
+          content: `La **memoria di lavoro** è un sistema a capacità limitata che ti permette di mantenere temporaneamente e manipolare le informazioni necessarie per compiti cognitivi complessi, come il ragionamento e l'apprendimento.
+
+**Nel Prompting:**
+- Ricordare il contesto fornito all'AI nelle interazioni precedenti.
+- Tenere a mente le diverse componenti di un prompt complesso mentre lo si costruisce.
+- Confrontare la risposta attuale dell'AI con le istruzioni date e i risultati precedenti.
+
+**Esempio:** Stai scrivendo un racconto con l'AI. Devi ricordare i nomi dei personaggi, i dettagli della trama già stabiliti e le istruzioni specifiche che hai dato per il capitolo corrente.`
+        },
+        {
+          type: 'tip',
+          title: 'Check Metacognitivo sulla Memoria di Lavoro',
+          content: `🧠 Domandati:
+- "Ho tutte le informazioni chiave del contesto attuale disponibili mentalmente o ho bisogno di prenderne nota?"
+- "Il mio prompt è diventato così complesso che sto faticando a ricordarne tutte le parti e i loro scopi?"
+- "Sto attivamente richiamando informazioni rilevanti dalle interazioni precedenti con l'AI?"`
+        },
+        {
+          type: 'text',
+          title: '3. Pianificazione Strategica: L\'Architetto dei Prompt',
+          content: `La **pianificazione** è un'abilità esecutiva cruciale che coinvolge la capacità di stabilire obiettivi, definire i passaggi per raggiungerli, organizzare le risorse e anticipare i risultati.
+
+**Nel Prompting:**
+- Strutturare una conversazione multi-turn con l'AI.
+- Scomporre una richiesta complessa in una serie di prompt più piccoli e gestibili (approccio bottom-up).
+- Anticipare come l'AI potrebbe interpretare certe frasi e pianificare alternative.
+
+**Esempio:** Invece di chiedere "Scrivi un intero business plan", pianifichi una serie di prompt: "Definiamo la mission", "Analizziamo il target", "Proponi strategie di marketing", ecc.`
+        },
+        {
+          type: 'tip',
+          title: 'Check Metacognitivo sulla Pianificazione',
+          content: `🗺️ Domandati:
+- "Ho una strategia chiara per questa interazione o sto procedendo a caso?"
+- "Quali sono i passaggi logici per guidare l'AI verso il risultato desiderato?"
+- "Ho considerato possibili ostacoli o incomprensioni da parte dell'AI e come superarli?"`
+        },
+        {
+          type: 'text',
+          title: '4. Flessibilità Cognitiva: L\'Arte dell\'Adattamento',
+          content: `La **flessibilità cognitiva** (o shifting) è la capacità di adattare il proprio pensiero e comportamento a situazioni nuove, mutevoli o inaspettate. Permette di passare da un compito a un altro o di cambiare prospettiva.
+
+**Nel Prompting:**
+- Modificare il proprio prompt quando l'AI non fornisce la risposta attesa.
+- Esplorare diverse formulazioni o approcci se il primo tentativo fallisce.
+- Integrare feedback inatteso dall'AI per migliorare la richiesta.
+
+**Esempio:** L'AI continua a fraintendere una tua richiesta. Invece di ripetere lo stesso prompt, usi la flessibilità cognitiva per riformularlo completamente, magari usando un'analogia o un ruolo diverso (es. "Spiegamelo come se fossi un bambino").`
+        },
+        {
+          type: 'tip',
+          title: 'Check Metacognitivo sulla Flessibilità',
+          content: `🤸 Domandati:
+- "Sono ancorato a un solo modo di formulare la mia richiesta, anche se non sta funzionando?"
+- "Sono aperto a cambiare radicalmente il mio approccio se necessario?"
+- "Come posso usare la risposta dell'AI, anche se non è quella attesa, per affinare la mia prossima mossa?"`
+        },
+        {
+          type: 'text',
+          title: '5. Ragionamento Logico e Valutazione Critica: Il Giudice Interiore',
+          content: `Il **ragionamento logico** permette di trarre conclusioni valide da premesse date, mentre la **valutazione critica** è l'abilità di analizzare informazioni e argomentazioni in modo obiettivo per formarne un giudizio.
+
+**Nel Prompting:**
+- Costruire prompt che siano internamente coerenti e non contraddittori.
+- Valutare la logica, la coerenza e l'accuratezza delle risposte dell'AI.
+- Identificare fallacie logiche o bias nelle informazioni generate.
+
+**Esempio:** Chiedi all'AI di confrontare due prodotti. Valuti criticamente se il confronto è equilibrato, se i criteri usati sono rilevanti e se le conclusioni sono supportate dai dati presentati.`
+        },
+        {
+          type: 'tip',
+          title: 'Check Metacognitivo sul Ragionamento e Valutazione',
+          content: `⚖️ Domandati:
+- "Il mio prompt è formulato in modo logico e inequivocabile?"
+- "Sto accettando passivamente la risposta dell'AI o la sto analizzando criticamente?"
+- "Ci sono presupposti nascosti nel mio prompt o nella risposta dell'AI che dovrei esaminare?"`
+        },
+        {
+          type: 'text',
+          title: '6. Riconoscimento di Pattern: L\'Intuito Guidato dall\'Esperienza',
+          content: `Il **riconoscimento di pattern** è la capacità di identificare regolarità, tendenze o schemi ricorrenti nei dati o nelle informazioni.
+
+**Nel Prompting:**
+- Notare come l'AI risponde a certi tipi di istruzioni o formati.
+- Identificare quando l'AI sta entrando in un loop ripetitivo o sta "allucinando".
+- Riconoscere lo "stile" dell'AI e adattare i prompt per ottenere output più vicini al desiderato.
+
+**Esempio:** Noti che l'AI fornisce risposte più creative quando le dai un ruolo specifico (es. "Agisci come un esperto storico"). Sfrutti questo pattern per compiti futuri.`
+        },
+        {
+          type: 'tip',
+          title: 'Check Metacognitivo sul Riconoscimento di Pattern',
+          content: `🔍 Domandati:
+- "Sto notando schemi ricorrenti nel modo in cui l'AI interpreta le mie richieste?"
+- "Posso prevedere, basandomi sull'esperienza passata, come l'AI potrebbe reagire a un certo tipo di prompt?"
+- "Sto usando attivamente i pattern che ho riconosciuto per migliorare l'efficacia dei miei prompt?"`
+        },
+        {
+          type: 'warning',
+          title: 'Integrare la Consapevolezza Cognitiva',
+          content: `Sviluppare consapevolezza di queste abilità cognitive non è un esercizio teorico, ma una pratica continua. Più diventi cosciente di *come* pensi mentre interagisci con l'AI, più sarai in grado di dirigere questi processi per ottenere risultati straordinari. Considera queste abilità come una "squadra interna" da allenare e coordinare.`
+        }
+      ],
+      exercises: [
+        {
+          id: 'cog-reflect-1',
+          type: 'text', // Text exercise for self-reflection
+          question: 'Pensa a una tua recente interazione significativa con un\'AI. Descrivi brevemente il contesto. Poi, rifletti su quali delle abilità cognitive discusse in questo modulo (Attenzione, Memoria di Lavoro, Pianificazione, Flessibilità Cognitiva, Ragionamento, Riconoscimento di Pattern) hai utilizzato maggiormente. Ci sono state abilità che avresti potuto impiegare in modo più efficace? Se sì, come?',
+          explanation: 'Questo esercizio è puramente per la tua auto-riflessione. Non c\'è una risposta "giusta" o "sbagliata". L\'obiettivo è aumentare la tua consapevolezza metacognitiva sulle tue abilità cognitive nel contesto del prompting.'
         }
       ]
     }

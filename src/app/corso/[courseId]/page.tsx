@@ -5,7 +5,7 @@ import { useParams, useRouter } from 'next/navigation'
 import { useAuth } from '@/hooks/useAuth'
 import { courseBase } from '@/data/courseBase'
 import { Course, Module, Exercise, ModuleContent } from '@/types/course'
-import { ChevronLeft, ChevronRight, Clock, CheckCircle, Lock, Play, BookOpen, Lightbulb, AlertTriangle, HelpCircle, Award, XCircle } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Clock, CheckCircle, Lock, Play, BookOpen, Lightbulb, AlertTriangle, HelpCircle, Award, XCircle, Check, LayoutDashboard } from 'lucide-react'
 import { renderMarkdownParagraphs } from '@/utils/markdownProcessor'
 
 // Define minimum pass rate for the quiz (e.g., 80%)
@@ -19,6 +19,7 @@ export default function CoursePage() {
   const [course, setCourse] = useState<Course | null>(null)
   const [currentModuleIndex, setCurrentModuleIndex] = useState(0)
   const [completedModules, setCompletedModules] = useState<Set<string>>(new Set())
+  const [showCompletionNotification, setShowCompletionNotification] = useState(false)
 
   // State for quiz (Module 6)
   const [quizAnswers, setQuizAnswers] = useState<Record<string, number | string>>({})
@@ -26,19 +27,53 @@ export default function CoursePage() {
   const [quizScore, setQuizScore] = useState<number | null>(null)
   const [quizPassed, setQuizPassed] = useState<boolean | null>(null)
 
+  // Load progress from localStorage
+  useEffect(() => {
+    if (user?.uid && params.courseId) {
+      const storageKey = `course_progress_${user.uid}_${params.courseId}`
+      const savedProgress = localStorage.getItem(storageKey)
+      if (savedProgress) {
+        try {
+          const { completedModules: savedCompleted, currentModule } = JSON.parse(savedProgress)
+          setCompletedModules(new Set(savedCompleted))
+          if (currentModule !== undefined) {
+            setCurrentModuleIndex(currentModule)
+          }
+        } catch (error) {
+          console.error('Error loading saved progress:', error)
+        }
+      }
+    }
+  }, [user?.uid, params.courseId])
+
+  // Save progress to localStorage
+  const saveProgress = (completed: Set<string>, moduleIndex: number) => {
+    if (user?.uid && params.courseId) {
+      const storageKey = `course_progress_${user.uid}_${params.courseId}`
+      const progressData = {
+        completedModules: Array.from(completed),
+        currentModule: moduleIndex,
+        lastUpdated: new Date().toISOString()
+      }
+      localStorage.setItem(storageKey, JSON.stringify(progressData))
+    }
+  }
+
   useEffect(() => {
     if (params.courseId === 'corso-base') {
       const courseData = JSON.parse(JSON.stringify(courseBase)) as Course // Deep copy
       setCourse(courseData)
-      // Potentially load saved progress from localStorage or backend here
     }
   }, [params.courseId])
 
   useEffect(() => {
     if (!authLoading && !user) {
-      router.push('/')
+      // Allow access to 'corso-base' for dev/testing purposes even if not logged in
+      if (params.courseId !== 'corso-base') {
+        router.push('/')
+      }
     }
-  }, [user, authLoading, router])
+  }, [user, authLoading, router, params.courseId])
 
   const currentModule = useMemo(() => {
     if (!course) return null
@@ -76,8 +111,15 @@ export default function CoursePage() {
   const markModuleComplete = (moduleId: string) => {
     setCompletedModules(prev => {
       const newSet = new Set(prev)
-      newSet.add(moduleId)
-      // Potentially save to localStorage or backend here
+      if (!newSet.has(moduleId)) {
+        newSet.add(moduleId)
+        // Show completion notification
+        setShowCompletionNotification(true)
+        setTimeout(() => setShowCompletionNotification(false), 3000)
+        
+        // Save progress
+        saveProgress(newSet, currentModuleIndex)
+      }
       return newSet
     })
   }
@@ -85,31 +127,25 @@ export default function CoursePage() {
   const goToModule = (index: number) => {
     // Reset quiz state if navigating away from or to the quiz module
     if (course?.modules[index].id === 'modulo-6' || isQuizModule) {
-        // If navigating to the quiz module and it was already submitted, keep submitted state
-        // Otherwise, reset if navigating away or to an unsubmitted quiz.
-        // This logic might need refinement based on desired UX for re-visiting quiz
         if (course?.modules[index].id !== 'modulo-6' || !quizSubmitted) {
             setQuizAnswers({})
-            // setQuizSubmitted(false); // Decide if quiz can be retaken or just reviewed
-            // setQuizScore(null);
-            // setQuizPassed(null);
         }
     }
     setCurrentModuleIndex(index)
+    saveProgress(completedModules, index)
   }
   
   const completeAndNext = () => {
     if (currentModule) {
-      if (!isQuizModule) { // For non-quiz modules, just mark complete
+      if (!isQuizModule) {
         markModuleComplete(currentModule.id)
-      } else { // For quiz module, completion is handled by handleSubmitQuiz if passed
+      } else { 
         if (!quizSubmitted) {
           alert("Devi prima inviare il quiz per completare questo modulo.")
           return;
         }
         if (!quizPassed) {
           alert("Devi superare il quiz per marcare questo modulo come completo e procedere.")
-          // Potentially offer a "Riprova Quiz" option here by resetting quiz state
           return;
         }
       }
@@ -117,26 +153,28 @@ export default function CoursePage() {
     if (course && currentModuleIndex < course.modules.length - 1) {
       goToModule(currentModuleIndex + 1)
     } else {
-      // Last module completed, maybe show a course completion message or redirect
-      alert("Hai completato tutti i moduli del corso!")
+      alert("🎉 Congratulazioni! Hai completato tutto il corso!")
     }
   }
 
+  const getCompletionPercentage = () => {
+    if (!course) return 0
+    return Math.round((completedModules.size / course.modules.length) * 100)
+  }
 
-  if (authLoading) {
+  if (authLoading && params.courseId !== 'corso-base') { // Show loading only if auth is strictly required
     return (
       <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-slate-600 dark:text-slate-300">Caricamento...</p>
+          <p className="text-slate-600 dark:text-slate-300">Caricamento autenticazione...</p>
         </div>
       </div>
     )
   }
 
-  if (!user) {
-    return null 
-  }
+  // If auth is not loading, but user is null and course is not 'corso-base', redirect handled by useEffect.
+  // If course is 'corso-base', it can be viewed without login for dev purposes.
 
   if (!course || !currentModule) {
     return (
@@ -175,12 +213,19 @@ export default function CoursePage() {
   
   const totalModules = course.modules.length;
   const isLastModule = currentModuleIndex === totalModules - 1;
+  const isCorsoBase = params.courseId === 'corso-base';
 
   return (
     <div className="min-h-screen bg-slate-100 dark:bg-slate-950">
-      {/* Header */}
+      {showCompletionNotification && (
+        <div className="fixed top-4 right-4 z-50 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center space-x-2 animate-slide-in-right">
+          <CheckCircle className="w-5 h-5" />
+          <span className="font-medium">Modulo completato! ✨</span>
+        </div>
+      )}
+
       <div className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-40">
-        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8"> {/* Adjusted to max-w-screen-2xl for wider layout */}
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-3">
               <button
@@ -191,32 +236,59 @@ export default function CoursePage() {
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <div>
-                <h1 className="text-md sm:text-lg font-semibold text-slate-900 dark:text-white truncate max-w-[200px] sm:max-w-xs md:max-w-md lg:max-w-lg">
+                <h1 className="text-md sm:text-lg font-semibold text-slate-900 dark:text-white truncate max-w-[150px] sm:max-w-xs md:max-w-md lg:max-w-lg">
                   {course.title}
                 </h1>
                 <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-                  Modulo {currentModuleIndex + 1} di {totalModules}: {currentModule.title}
+                  Modulo {currentModuleIndex + 1}/{totalModules}: {currentModule.title}
                 </p>
               </div>
             </div>
             <div className="flex items-center space-x-2 sm:space-x-4">
-              {user.photoURL && (
+              <div className="hidden sm:flex items-center space-x-2 text-sm text-slate-600 dark:text-slate-300">
+                <div className="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
+                  <span className="text-green-600 dark:text-green-400 font-semibold text-xs">
+                    {getCompletionPercentage()}%
+                  </span>
+                </div>
+                <span className="hidden md:inline">Completato</span>
+              </div>
+              
+              {user?.photoURL && (
                 <img src={user.photoURL} alt="User avatar" className="w-8 h-8 rounded-full hidden sm:block"/>
               )}
               <div className="text-sm text-slate-600 dark:text-slate-300 hidden md:block">
-                {user.displayName || 'Studente'}
+                {user?.displayName || (isCorsoBase ? 'Sviluppatore' : 'Studente')}
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+      <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8"> {/* Adjusted to max-w-screen-2xl */}
         <div className="grid lg:grid-cols-12 gap-6 sm:gap-8">
-          {/* Sidebar - Indice Moduli */}
+          {/* Sidebar - Indice Moduli (Left) */}
           <div className="lg:col-span-3">
             <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-4 sm:p-6 sticky top-24">
-              <h3 className="font-semibold text-slate-900 dark:text-white mb-4 text-lg">Indice del Corso</h3>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-semibold text-slate-900 dark:text-white text-lg">Indice del Corso</h3>
+                <div className="text-sm text-slate-500 dark:text-slate-400">
+                  {completedModules.size}/{totalModules}
+                </div>
+              </div>
+              
+              <div className="mb-6">
+                <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
+                  <div 
+                    className="bg-green-500 h-2 rounded-full transition-all duration-500 ease-out"
+                    style={{ width: `${getCompletionPercentage()}%` }}
+                  ></div>
+                </div>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                  {getCompletionPercentage()}% completato
+                </p>
+              </div>
+
               <div className="space-y-2">
                 {course.modules.map((module, index) => (
                   <button
@@ -237,9 +309,19 @@ export default function CoursePage() {
                         Modulo {index + 1}
                       </span>
                       {completedModules.has(module.id) ? (
-                        <CheckCircle className="w-4 h-4 text-green-500" />
+                        <div className="flex items-center justify-center w-5 h-5 bg-green-500 rounded-full">
+                          <Check className="w-3.5 h-3.5 text-white font-bold" />
+                        </div>
                       ) : (
-                        <div className={`w-4 h-4 border-2 ${index === currentModuleIndex ? 'border-blue-400 dark:border-blue-500' : 'border-slate-300 dark:border-slate-600'} rounded-full`} />
+                        <div className={`w-5 h-5 border-2 ${
+                          index === currentModuleIndex 
+                            ? 'border-blue-400 dark:border-blue-500 bg-blue-50 dark:bg-blue-900/20' 
+                            : 'border-slate-300 dark:border-slate-600'
+                        } rounded-full flex items-center justify-center`}>
+                          {index === currentModuleIndex && (
+                            <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                          )}
+                        </div>
                       )}
                     </div>
                     <p className={`text-xs truncate ${
@@ -249,9 +331,16 @@ export default function CoursePage() {
                     }`}>
                       {module.title}
                     </p>
-                    <div className="flex items-center mt-1.5 text-xs text-slate-500 dark:text-slate-400">
-                      <Clock className="w-3 h-3 mr-1.5" />
-                      {module.duration}
+                    <div className="flex items-center justify-between mt-1.5">
+                      <div className="flex items-center text-xs text-slate-500 dark:text-slate-400">
+                        <Clock className="w-3 h-3 mr-1.5" />
+                        {module.duration}
+                      </div>
+                      {completedModules.has(module.id) && (
+                        <span className="text-xs text-green-600 dark:text-green-400 font-medium">
+                          Visto
+                        </span>
+                      )}
                     </div>
                   </button>
                 ))}
@@ -259,17 +348,29 @@ export default function CoursePage() {
             </div>
           </div>
 
-          {/* Content Area */}
-          <div className="lg:col-span-9">
+          {/* Content Area (Center) */}
+          {/* Adjusted to lg:col-span-6 if concept map is visible, otherwise lg:col-span-9 */}
+          <div className={isCorsoBase ? "lg:col-span-6" : "lg:col-span-9"}>
             <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
-              {/* Module Header */}
               <div className="p-5 sm:p-6 md:p-8 border-b border-slate-200 dark:border-slate-700">
-                <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-2">
-                  {currentModule.title}
-                </h2>
-                <p className="text-slate-600 dark:text-slate-300 mb-4 text-sm sm:text-base">
-                  {currentModule.description}
-                </p>
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex-1">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-2">
+                      {currentModule.title}
+                    </h2>
+                    <p className="text-slate-600 dark:text-slate-300 mb-4 text-sm sm:text-base">
+                      {currentModule.description}
+                    </p>
+                  </div>
+                  {completedModules.has(currentModule.id) && (
+                    <div className="flex items-center space-x-2 bg-green-50 dark:bg-green-900/20 px-3 py-1.5 rounded-full">
+                      <CheckCircle className="w-4 h-4 text-green-600 dark:text-green-400" />
+                      <span className="text-sm font-medium text-green-600 dark:text-green-400">
+                        Completato
+                      </span>
+                    </div>
+                  )}
+                </div>
                 <div className="flex items-center space-x-4">
                   <div className="flex items-center text-sm text-slate-500 dark:text-slate-400">
                     <Clock className="w-4 h-4 mr-1.5" />
@@ -278,7 +379,6 @@ export default function CoursePage() {
                 </div>
               </div>
 
-              {/* Module Content & Exercises */}
               <div className="p-5 sm:p-6 md:p-8 space-y-6 sm:space-y-8">
                 {currentModule.content.map((contentItem, index) => (
                   <div
@@ -304,14 +404,12 @@ export default function CoursePage() {
                   </div>
                 ))}
 
-                {/* Exercises / Quiz Area */}
                 {currentModule.exercises && currentModule.exercises.length > 0 && (
                   <div className="border-t border-slate-200 dark:border-slate-700 pt-6 sm:pt-8">
                     <h3 className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-white mb-5 sm:mb-6">
                       {isQuizModule ? 'Quiz Finale' : 'Esercizi Pratici'}
                     </h3>
                     
-                    {/* Quiz Results Display */}
                     {isQuizModule && quizSubmitted && quizScore !== null && (
                       <div className={`p-4 sm:p-5 mb-6 rounded-lg border-l-4 ${quizPassed ? 'bg-green-50 dark:bg-green-900/30 border-green-500' : 'bg-red-50 dark:bg-red-900/30 border-red-500'}`}>
                         <div className="flex items-center">
@@ -368,7 +466,7 @@ export default function CoursePage() {
                               ))}
                             </div>
                           )}
-                          {exercise.type === 'text' && ( // Not used for current quiz but kept for flexibility
+                          {exercise.type === 'text' && ( 
                             <textarea
                               className="w-full p-3 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                               rows={4}
@@ -398,7 +496,6 @@ export default function CoursePage() {
                 )}
               </div>
 
-              {/* Navigation Footer */}
               <div className="p-5 sm:p-6 md:p-8 border-t border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <button
                   onClick={() => currentModuleIndex > 0 && goToModule(currentModuleIndex - 1)}
@@ -419,16 +516,80 @@ export default function CoursePage() {
                     }
                   `}
                 >
-                  <span>
-                    {isLastModule ? (isQuizModule && quizPassed ? 'Termina Corso' : (isQuizModule ? 'Termina Corso (Quiz non superato)' : 'Termina Corso')) : 'Completa e Vai Avanti'}
-                  </span>
-                  {!isLastModule && <ChevronRight className="w-4 h-4" />}
+                  {completedModules.has(currentModule.id) && !isLastModule && !(isQuizModule && !quizPassed) ? (
+                    <>
+                      <CheckCircle className="w-4 h-4" />
+                      <span>Vai al Prossimo Modulo</span>
+                      <ChevronRight className="w-4 h-4" />
+                    </>
+                  ) : (
+                    <>
+                      <span>
+                        {isLastModule ? (isQuizModule && quizPassed ? 'Termina Corso' : (isQuizModule ? 'Termina Corso (Quiz non superato)' : 'Termina Corso')) : 'Completa e Vai Avanti'}
+                      </span>
+                      {!isLastModule && <ChevronRight className="w-4 h-4" />}
+                    </>
+                  )}
                 </button>
               </div>
             </div>
           </div>
+
+          {/* Concept Map (Right Sidebar for corso-base) */}
+          {isCorsoBase && (
+            <div className="lg:col-span-3">
+              <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-4 sm:p-6 sticky top-24">
+                <div className="flex items-center mb-4">
+                  <LayoutDashboard className="w-5 h-5 text-blue-600 dark:text-blue-400 mr-2" />
+                  <h3 className="font-semibold text-slate-900 dark:text-white text-lg">Mappa Concettuale</h3>
+                </div>
+                <div className="max-h-[calc(100vh-10rem)] overflow-y-auto space-y-4 pr-2">
+                  {course.modules.map((module, moduleIdx) => (
+                    <div 
+                      key={module.id}
+                      className={`p-3 rounded-lg transition-all ${moduleIdx === currentModuleIndex ? 'bg-blue-50 dark:bg-blue-900/30 ring-1 ring-blue-400' : 'bg-slate-50 dark:bg-slate-800/30'}`}
+                    >
+                      <h4 
+                        className={`font-medium text-sm cursor-pointer flex items-center justify-between ${moduleIdx === currentModuleIndex ? 'text-blue-700 dark:text-blue-300' : 'text-slate-800 dark:text-slate-200'}`}
+                        onClick={() => goToModule(moduleIdx)}
+                      >
+                        <span>Modulo {moduleIdx + 1}: {module.title}</span>
+                        {completedModules.has(module.id) && <CheckCircle className="w-4 h-4 text-green-500 ml-2 flex-shrink-0" />}
+                      </h4>
+                      {moduleIdx === currentModuleIndex && module.content && module.content.length > 0 && (
+                        <ul className="mt-2 space-y-1.5 pl-3 border-l-2 border-blue-200 dark:border-blue-700">
+                          {module.content.filter(item => item.title).map((contentItem, contentIdx) => (
+                            <li key={`map-content-${module.id}-${contentIdx}`} className="text-xs text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors">
+                              {contentItem.title}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
+
+      <style jsx global>{`
+        @keyframes slide-in-right {
+          from {
+            opacity: 0;
+            transform: translateX(100%);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        
+        .animate-slide-in-right {
+          animation: slide-in-right 0.3s ease-out;
+        }
+      `}</style>
     </div>
   )
 }
