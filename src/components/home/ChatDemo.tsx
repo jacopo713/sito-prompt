@@ -77,21 +77,26 @@ Modifichiamo \`src/app/page.tsx\`. Hai già idee specifiche o vuoi una struttura
 export default function ChatDemo({ type }: ChatDemoProps) {
   const [messages, setMessages] = useState<Message[]>([])
   const [currentPhase, setCurrentPhase] = useState<'idle' | 'user-typing' | 'ai-responding' | 'complete'>('idle')
-  const messagesEndRef = useRef<HTMLDivElement>(null)
+  
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null); 
   const demoAbortControllerRef = useRef<AbortController | null>(null)
 
   const demoData = type === 'passive' ? PASSIVE_DEMO : PROACTIVE_DEMO
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  }
-
-  useEffect(scrollToBottom, [messages])
+  useEffect(() => {
+    const container = messagesContainerRef.current;
+    if (container) {
+      const animationFrameId = requestAnimationFrame(() => {
+        container.scrollTop = container.scrollHeight;
+      });
+      return () => cancelAnimationFrame(animationFrameId);
+    }
+  }, [messages, currentPhase]);
 
   const runFullDemo = async (abortSignal: AbortSignal) => {
-    // This function now encapsulates the entire demo sequence for one run
-    setCurrentPhase('idle')
-    setMessages([])
+    setCurrentPhase('idle');
+    setMessages([]); 
 
     const safeSleep = (ms: number): Promise<void> => {
       return new Promise(resolve => {
@@ -103,8 +108,8 @@ export default function ChatDemo({ type }: ChatDemoProps) {
 
     const typeOutMessage = async (text: string, role: 'user' | 'assistant') => {
       const messageId = Date.now().toString()
-      setMessages(prev => [...prev, { id: messageId, role, content: '', isTyping: true }])
-
+      setMessages(prev => [...prev, { id: messageId, role, content: '', isTyping: true }]);
+      
       const typingSpeed = role === 'user' ? 30 : 20
 
       for (let i = 0; i <= text.length; i++) {
@@ -113,19 +118,19 @@ export default function ChatDemo({ type }: ChatDemoProps) {
         setMessages(prev => prev.map(msg => msg.id === messageId ? { ...msg, content: currentText } : msg))
         await safeSleep(typingSpeed)
       }
-      if (abortSignal.aborted) return; // Check again after loop before setting isTyping to false
+      if (abortSignal.aborted) return;
       setMessages(prev => prev.map(msg => msg.id === messageId ? { ...msg, isTyping: false } : msg))
     };
 
     try {
-      await safeSleep(300) // Initial pause
+      await safeSleep(300) 
       if (abortSignal.aborted) throw new DOMException('Demo aborted', 'AbortError');
 
       setCurrentPhase('user-typing')
       await typeOutMessage(demoData.userPrompt, 'user')
       if (abortSignal.aborted) throw new DOMException('Demo aborted', 'AbortError');
 
-      await safeSleep(700) // Pause before AI
+      await safeSleep(700) 
       if (abortSignal.aborted) throw new DOMException('Demo aborted', 'AbortError');
 
       setCurrentPhase('ai-responding')
@@ -135,9 +140,7 @@ export default function ChatDemo({ type }: ChatDemoProps) {
       setCurrentPhase('complete')
     } catch (error) {
       if ((error as Error).name === 'AbortError') {
-        // console.log('Demo sequence aborted successfully.');
-        // Reset to a clean state if aborted mid-sequence
-        setMessages([])
+        setMessages([]) 
         setCurrentPhase('idle')
       } else {
         console.error("Error during demo:", error)
@@ -147,7 +150,7 @@ export default function ChatDemo({ type }: ChatDemoProps) {
 
   useEffect(() => {
     if (demoAbortControllerRef.current) {
-      demoAbortControllerRef.current.abort() // Abort previous demo
+      demoAbortControllerRef.current.abort() 
     }
 
     const abortController = new AbortController()
@@ -156,18 +159,18 @@ export default function ChatDemo({ type }: ChatDemoProps) {
     runFullDemo(abortController.signal)
 
     return () => {
-      abortController.abort() // Cleanup on unmount or before next effect
+      abortController.abort() 
       demoAbortControllerRef.current = null
     }
-  }, [type, demoData.userPrompt, demoData.aiResponse]) // demoData will change if type changes. Explicitly listing properties from demoData ensures effect re-runs if these specific strings change.
+  }, [type, demoData.userPrompt, demoData.aiResponse])
 
   const handleReplayDemo = () => {
-    if (demoAbortControllerRef.current) {
-      demoAbortControllerRef.current.abort()
+    if (currentPhase !== 'idle' && currentPhase !== 'complete' && demoAbortControllerRef.current) {
+        demoAbortControllerRef.current.abort();
     }
-    const newAbortController = new AbortController()
-    demoAbortControllerRef.current = newAbortController
-    runFullDemo(newAbortController.signal)
+    const newAbortController = new AbortController();
+    demoAbortControllerRef.current = newAbortController;
+    runFullDemo(newAbortController.signal);
   }
 
   const getTitle = () => {
@@ -191,7 +194,7 @@ export default function ChatDemo({ type }: ChatDemoProps) {
   const processBold = (textSegment: string, baseKey: string) => {
     const boldRegex = /\*\*(.*?)\*\*/g;
     let lastIndex = 0;
-    const elements = [];
+    const elements: React.ReactNode[] = [];
     let matchIndex = 0;
     textSegment.replace(boldRegex, (match, boldText, offset) => {
       if (offset > lastIndex) {
@@ -208,18 +211,33 @@ export default function ChatDemo({ type }: ChatDemoProps) {
   };
   
   const renderContent = (content: string, messageId: string) => {
-    const codeBlockRegex = /```(bash|tsx|typescript|javascript)?\n([\s\S]*?)```/g;
+    const codeBlockRegex = /```(?:(bash|tsx|typescript|javascript)\n)?([\s\S]*?)```/g;
     let lastIndex = 0;
     const parts: React.ReactNode[] = [];
     let partIndex = 0;
   
-    content.replace(codeBlockRegex, (match, lang, code, offset) => {
+    content.replace(codeBlockRegex, (match, lang, codeContent, offset) => { 
       if (offset > lastIndex) {
-        parts.push(...processBold(content.substring(lastIndex, offset), `${messageId}-text-${partIndex++}`));
+        const textBefore = content.substring(lastIndex, offset);
+        parts.push(...processBold(textBefore, `${messageId}-text-${partIndex++}`));
       }
+      
+      let finalCode = codeContent.trim();
+
+      // Safeguard: If 'lang' was specified (e.g., ```bash) AND the captured codeContent
+      // itself redundantly starts with that same language identifier, remove it.
+      if (lang) {
+        const escapedLang = lang.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // Escape lang for regex
+        const langPrefixPattern = new RegExp(`^${escapedLang}\\s*\\n`); // Pattern: lang, optional space, newline
+        
+        if (langPrefixPattern.test(finalCode)) {
+          finalCode = finalCode.replace(langPrefixPattern, '');
+        }
+      }
+
       parts.push(
         <pre key={`${messageId}-code-${partIndex++}`} className="bg-slate-800 dark:bg-gray-900 text-white p-3 my-2 rounded-md text-xs overflow-x-auto">
-          <code>{code.trim()}</code>
+          <code>{finalCode}</code>
         </pre>
       );
       lastIndex = offset + match.length;
@@ -227,14 +245,14 @@ export default function ChatDemo({ type }: ChatDemoProps) {
     });
   
     if (lastIndex < content.length) {
-      parts.push(...processBold(content.substring(lastIndex), `${messageId}-text-${partIndex++}`));
+      const textAfter = content.substring(lastIndex);
+      parts.push(...processBold(textAfter, `${messageId}-text-${partIndex++}`));
     }
     
-    // Filter out empty strings that might result from processBold
     return parts.filter(part => typeof part !== 'string' || part.length > 0); 
   };
 
-  const isDemoEffectivelyRunning = currentPhase !== 'idle' && currentPhase !== 'complete';
+  const isDemoRunning = currentPhase !== 'idle' && currentPhase !== 'complete';
 
   return (
     <div className="bg-white dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-lg overflow-hidden flex flex-col h-[550px] sm:h-[600px]">
@@ -257,7 +275,10 @@ export default function ChatDemo({ type }: ChatDemoProps) {
       </div>
 
       {/* Chat Messages */}
-      <div className="flex-grow overflow-y-auto p-4 space-y-4">
+      <div 
+        ref={messagesContainerRef} 
+        className="flex-grow overflow-y-auto p-4 space-y-4"
+      >
         {messages.map((message) => (
           <div
             key={message.id}
@@ -285,16 +306,15 @@ export default function ChatDemo({ type }: ChatDemoProps) {
               }`}>
                 {renderContent(message.content, message.id)}
                 {message.isTyping && (
-                  <span className="inline-block w-1.5 h-3.5 bg-current opacity-50 animate-pulse ml-1" />
+                  <span className="inline-block w-1 h-3.5 bg-current opacity-75 animate-pulse ml-1 align-text-bottom" />
                 )}
               </div>
             </div>
           </div>
         ))}
         
-        {currentPhase === 'ai-responding' && messages.some(m => m.role === 'assistant' && m.isTyping) && (
-          <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm px-1 pt-1">
-            <Bot className="w-4 h-4 flex-shrink-0" />
+        {currentPhase === 'ai-responding' && messages.some(m => m.role === 'assistant' && m.isTyping === true) && (
+          <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm px-1 pt-1 ml-10 sm:ml-11">
             <div className="flex gap-1 items-center">
               <div className="w-1.5 h-1.5 bg-slate-400 dark:bg-slate-500 rounded-full animate-bounce" />
               <div className="w-1.5 h-1.5 bg-slate-400 dark:bg-slate-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }} />
@@ -309,11 +329,11 @@ export default function ChatDemo({ type }: ChatDemoProps) {
       <div className="p-3 sm:p-4 bg-slate-50 dark:bg-slate-800 border-t border-slate-100 dark:border-slate-700">
         <button
           onClick={handleReplayDemo}
-          disabled={isDemoEffectivelyRunning && currentPhase !== 'complete'}
+          disabled={isDemoRunning}
           className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-slate-600 hover:bg-slate-700 dark:bg-slate-600 dark:hover:bg-slate-500 text-white rounded-lg hover:shadow-md transition-all text-sm font-medium disabled:opacity-60 disabled:cursor-not-allowed"
         >
-          <RefreshCw className={`w-3.5 h-3.5 ${isDemoEffectivelyRunning && currentPhase !== 'complete' ? 'animate-spin' : ''}`} />
-          {isDemoEffectivelyRunning && currentPhase !== 'complete' ? 'In Corso...' : 'Riproduci Demo'}
+          <RefreshCw className={`w-3.5 h-3.5 ${isDemoRunning ? 'animate-spin' : ''}`} />
+          {isDemoRunning ? 'In Corso...' : 'Riproduci Demo'}
         </button>
       </div>
     </div>
