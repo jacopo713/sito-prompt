@@ -1,6 +1,7 @@
 import Image from "next/image";
 import AuthButton from "@/components/AuthButton";
 import PurchaseButton from "@/components/PurchaseButton";
+import PromptComparison from "@/components/home/PromptComparison";
 
 export default function Home() {
   return (
@@ -222,13 +223,18 @@ export default function Home() {
 
           {/* Arrow to next section */}
           <div className="flex justify-center mt-16">
-            <a href="#coaching" className="text-slate-400 hover:text-blue-600 transition-colors">
+            <a href="#demo" className="text-slate-400 hover:text-blue-600 transition-colors">
               <svg className="w-6 h-6 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </svg>
             </a>
           </div>
         </section>
+
+        {/* NUOVA SEZIONE: Prompt Comparison Demo */}
+        <div id="demo">
+          <PromptComparison />
+        </div>
 
         {/* Live Coaching Section */}
         <section id="coaching" className="mt-20 mb-20">
