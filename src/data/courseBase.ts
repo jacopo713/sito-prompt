@@ -17,56 +17,126 @@ export const courseBase: Course = {
     {
       id: 'modulo-1',
       title: 'Introduzione alla Metacognizione nel Prompt',
-      description: 'Scopri cos\'è la metacognizione e come applicarla al prompt engineering',
-      duration: '45 min',
+      description: 'Scopri cos\'è la metacognizione dal punto di vista psicologico e come applicarla al prompt engineering',
+      duration: '60 min',
       content: [
         {
           type: 'text',
-          title: 'Benvenuto nel futuro del Prompt Engineering',
-          content: `Il prompt engineering non è solo scrivere istruzioni per l'AI. È l'arte di **pensare insieme all'intelligenza artificiale**, creando una simbiosi cognitiva che amplifica le tue capacità mentali.
+          title: 'Che cos\'è la Metacognizione?',
+          content: `La **metacognizione** è letteralmente "il pensare sul pensare" - la capacità di essere consapevoli dei propri processi mentali mentre stanno accadendo.
 
-In questo corso imparerai la **Metacognizione del Prompt**: la capacità di riflettere e ottimizzare non solo quello che chiedi all'AI, ma *come* pensi mentre lo fai.`
+È quella voce interiore che ti chiede: "Sto capendo davvero questo concetto?" oppure "Qual è il modo migliore per affrontare questo problema?"
+
+**Esempi quotidiani di metacognizione:**
+- Quando ti accorgi di non aver capito una spiegazione e chiedi chiarimenti
+- Quando scegli deliberatamente una strategia diversa per studiare un argomento difficile  
+- Quando ti rendi conto che stai procrastinando e cambi approccio
+- Quando rifletti su un errore per capire come evitarlo in futuro`
         },
         {
           type: 'tip',
-          title: 'Concetto Chiave',
-          content: '🧠 **Metacognizione** = "Pensare sul pensare". Nel prompt engineering significa essere consapevoli di come strutturi le tue richieste e perché.'
+          title: 'Momento di Riflessione',
+          content: '🤔 **Pausa metacognitiva**: Mentre leggi questo testo, prova a notare come sta funzionando la tua mente. Stai solo "assorbendo" le informazioni o stai attivamente collegando questi concetti a tue esperienze? Questo è metacognizione in azione!'
+        },
+        {
+          type: 'text',
+          title: 'Perché la Metacognizione è Cruciale',
+          content: `La ricerca in psicologia cognitiva ha dimostrato che le persone con **alta consapevolezza metacognitiva** ottengono risultati superiori in praticamente ogni ambito:
+
+**📚 Apprendimento più efficace:** Gli studenti metacognitivi imparano il 40% più velocemente
+**🎯 Problem-solving migliore:** Risolvono problemi complessi con maggiore successo
+**🧠 Memoria potenziata:** Ricordano informazioni più a lungo e con maggiore precisione
+**⚡ Adattabilità:** Si adattano più rapidamente a nuove situazioni e cambiamenti
+
+**Il segreto?** Non si limitano a "fare" - riflettono costantemente su *come* stanno facendo e su *come* potrebbero fare meglio.`
+        },
+        {
+          type: 'example',
+          title: 'Studente Normale vs Studente Metacognitivo',
+          content: `**Studente normale** mentre studia:
+"Leggo questo capitolo, poi faccio gli esercizi"
+
+**Studente metacognitivo** mentre studia:
+"Prima verifico cosa so già di questo argomento... Mentre leggo, mi sto chiedendo se sto davvero comprendendo o solo memorizzando... Questo concetto mi sembra difficile, provo a spiegarlo a parole mie... Gli esercizi mi stanno venendo facili, forse dovrei cercare problemi più complessi per testare davvero la mia comprensione"
+
+La differenza è evidente: il secondo studente **guida attivamente** il suo processo di apprendimento.`
+        },
+        {
+          type: 'text',
+          title: 'Il Ponte: Dalla Psicologia al Prompt Engineering',
+          content: `Ora, **trasferisci questo concetto all'AI**. Quando interagisci con un'intelligenza artificiale, stai essenzialmente "pensando insieme" a un sistema estremamente potente.
+
+La maggior parte delle persone usa l'AI come un motore di ricerca avanzato:
+- Fa una domanda
+- Riceve una risposta  
+- Accetta il risultato senza riflettere
+
+Ma cosa succederebbe se applicassi la **metacognizione** a questo processo?`
+        },
+        {
+          type: 'text',
+          title: 'Metacognizione nel Prompt: La Rivoluzione',
+          content: `Il **prompt engineering metacognitivo** significa essere consapevoli e riflessivi su:
+
+**🎯 Il tuo obiettivo:** "Cosa sto realmente cercando di ottenere?"
+**🧠 Il tuo processo mentale:** "Come sto strutturando questa richiesta?"
+**🔄 L'interazione:** "Come sta rispondendo l'AI e perché?"
+**⚡ L'ottimizzazione:** "Come posso migliorare questa conversazione?"
+
+Non stai più semplicemente "usando" l'AI - stai **co-pensando** con essa.`
+        },
+        {
+          type: 'example',
+          title: 'Approccio Normale vs Approccio Metacognitivo',
+          content: `**Approccio normale:**
+"Scrivi un piano di marketing per la mia startup"
+
+**Approccio metacognitivo:**
+"Voglio sviluppare un piano di marketing, ma prima voglio essere sicuro di strutturare bene questa richiesta. Quali informazioni ha bisogno l'AI per darmi un output davvero utile? Probabilmente dovrei specificare: il settore, il target, il budget, i miei obiettivi specifici... 
+
+Ora provo con: 'Aiutami a creare un piano di marketing per una startup nel settore fintech, target giovani professionisti 25-35 anni, budget mensile 5k€, obiettivo principale acquisire 1000 utenti nei primi 3 mesi. Prima di iniziare, dimmi: ci sono altri dettagli cruciali che dovrei condividere per ottimizzare questo piano?'"
+
+Vedi la differenza? Il secondo approccio **attiva il pensiero critico** sia tuo che dell'AI.`
         },
         {
           type: 'text',
           title: 'I 4 Pilastri della Metodologia CORE',
-          content: `**C** - Context Mastery: Gestione avanzata del contesto
-**O** - Optimization Thinking: Pensiero ottimizzante
-**R** - Reflexive Prompting: Prompting riflessivo  
-**E** - Enhancement Symbiosis: Simbiosi di potenziamento
+          content: `In questo corso svilupperai un sistema metacognitivo strutturato attraverso i **4 Pilastri CORE**:
 
-Ogni pilastro rappresenta una dimensione cognitiva che svilupperai durante il corso.`
+**C** - **Context Mastery**: Gestione consapevole e strategica del contesto
+**O** - **Optimization Thinking**: Mentalità di miglioramento continuo  
+**R** - **Reflexive Prompting**: Prompting riflessivo e auto-correttivo
+**E** - **Enhancement Symbiosis**: Simbiosi di potenziamento reciproco
+
+Ogni pilastro rappresenta una dimensione della tua evoluzione cognitiva nell'interazione con l'AI.`
         },
         {
-          type: 'example',
-          title: 'Prompt Normale vs Prompt Metacognitivo',
-          content: `**Prompt normale:**
-"Scrivi un articolo sul marketing digitale"
+          type: 'warning',
+          title: 'Un Cambiamento di Paradigma',
+          content: `⚠️ **Attenzione**: Questo approccio richiede un cambiamento mentale profondo. Non stai imparando "trucchi" o "formule magiche" per i prompt. 
 
-**Prompt metacognitivo:**
-"Voglio scrivere un articolo sul marketing digitale. Prima dimmi: quali sono gli aspetti più innovativi e meno ovvi che dovrei considerare? Poi, strutturiamo insieme l'articolo partendo da una prospettiva originale che emerga da questa analisi."
-
-La differenza? Il secondo prompt **attiva il pensiero critico** sia tuo che dell'AI.`
+Stai sviluppando una **nuova forma di intelligenza** - la capacità di pensare efficacemente in partnership con l'AI. È più impegnativo, ma i risultati sono trasformativi.`
         }
       ],
       exercises: [
         {
           id: 'ex-1-1',
-          question: 'Qual è la differenza principale tra prompt engineering tradizionale e metacognizione del prompt?',
+          question: 'Descrivi un momento recente in cui hai usato la metacognizione nella vita quotidiana (anche senza saperlo). Cosa ti ha fatto "fermare e riflettere" sul tuo processo mentale?',
+          type: 'text',
+          explanation: 'Questo esercizio ti aiuta a riconoscere che già usi la metacognizione, preparandoti ad applicarla consapevolmente ai prompt.'
+        },
+        {
+          id: 'ex-1-2',
+          question: 'Qual è la differenza principale tra usare l\'AI come "strumento" e sviluppare una "simbiosi cognitiva" con essa?',
           type: 'multiple-choice',
           options: [
             'Non c\'è differenza, sono la stessa cosa',
-            'La metacognizione si concentra sulla consapevolezza del processo di pensiero',
-            'Il prompt engineering tradizionale è più efficace',
-            'La metacognizione è solo teoria, il prompt engineering è pratica'
+            'La simbiosi significa essere consapevoli e riflessivi sul processo di interazione',
+            'Lo strumento è più efficace della simbiosi',
+            'La simbiosi è solo teoria, lo strumento è pratica'
           ],
           correctAnswer: 1,
-          explanation: 'La metacognizione del prompt aggiunge la dimensione della consapevolezza: non solo *cosa* chiedere, ma *come* e *perché* lo stai chiedendo.'
+          explanation: 'La simbiosi cognitiva trasforma l\'AI da semplice strumento a partner di pensiero, richiedendo consapevolezza metacognitiva del processo.'
         }
       ]
     },
