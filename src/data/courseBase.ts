@@ -143,60 +143,195 @@ Stai sviluppando una **nuova forma di intelligenza** - la capacità di pensare e
     {
       id: 'modulo-2', 
       title: 'Autoanalisi del Pensiero',
-      description: 'Sviluppa la consapevolezza metacognitiva del tuo processo di prompting',
-      duration: '60 min',
+      description: 'Sviluppa la consapevolezza metacognitiva del tuo processo di prompting attraverso l\'analisi del tuo stile cognitivo',
+      duration: '75 min',
       content: [
         {
           type: 'text',
-          title: 'Il Tuo Stile di Pensiero',
-          content: `Prima di ottimizzare i tuoi prompt, devi capire **come pensi naturalmente**. Ogni persona ha pattern cognitivi unici che influenzano il modo in cui interagisce con l'AI.
+          title: 'La Base Psicologica del Tuo Stile di Prompting',
+          content: `Prima di ottimizzare i tuoi prompt, devi capire **come funziona naturalmente la tua mente**. La ricerca in psicologia della personalità ha identificato 5 dimensioni fondamentali che influenzano il modo in cui elaboriamo informazioni e affrontiamo problemi.
 
-Esistono 4 stili principali di thinking prompting:`
-        },
-        {
-          type: 'text',
-          title: '🎯 Il Diretto',
-          content: `**Caratteristiche:** Va dritto al punto, prompt concisi, orientato ai risultati
-**Punti di forza:** Efficienza, chiarezza
-**Aree di miglioramento:** Può perdere sfumature, contesto limitato
-**Prompt tipico:** "Fammi un riassunto di questo documento"`
-        },
-        {
-          type: 'text', 
-          title: '🌊 L\'Esplorativo',
-          content: `**Caratteristiche:** Curioso, fa molte domande, esplora possibilità
-**Punti di forza:** Creatività, visione ampia
-**Aree di miglioramento:** Può divagare, difficoltà a concludere
-**Prompt tipico:** "Quali sono tutte le possibili interpretazioni di questo tema e come si collegano tra loro?"`
-        },
-        {
-          type: 'text',
-          title: '🏗️ Il Sistematico', 
-          content: `**Caratteristiche:** Strutturato, metodico, ama i framework
-**Punti di forza:** Organizzazione, completezza
-**Aree di miglioramento:** Rigidità, può bloccare la creatività
-**Prompt tipico:** "Analizza questo problema seguendo il framework XYZ, fornendo per ogni step..."`
-        },
-        {
-          type: 'text',
-          title: '🎨 Il Creativo',
-          content: `**Caratteristiche:** Associativo, metaforico, cerca soluzioni innovative
-**Punti di forza:** Originalità, pensiero laterale  
-**Aree di miglioramento:** Inconsistenza, può essere vago
-**Prompt tipico:** "Immagina che questo problema sia un paesaggio. Come lo descriveresti e cosa suggerisce per la soluzione?"`
+Queste dimensioni - conosciute come **"Big Five"** - si riflettono direttamente nel modo in cui interagisci con l'AI. Comprendere il tuo profilo ti permetterà di sviluppare un stile di prompting che amplifica i tuoi punti di forza naturali.`
         },
         {
           type: 'tip',
-          title: 'Esercizio di Autoanalisi',
-          content: `📝 **Rifletti:** Quale stile riconosci di più nel tuo approccio? Non esiste uno stile "migliore" - l'obiettivo è **amplificare i tuoi punti di forza** e **compensare le aree di miglioramento** attraverso prompt più metacognitivi.`
+          title: 'Autoanalisi Preliminare',
+          content: `🧠 **Prima di continuare, rifletti onestamente:** 
+- Come affronti naturalmente un problema nuovo?
+- Preferisci esplorare molte possibilità o focalizzarti su una soluzione?
+- Ti piace seguire procedure consolidate o inventare approcci originali?
+- Lavori meglio con indicazioni dettagliate o linee guida generali?
+
+Le tue risposte riveleranno pattern che si riflettono nei tuoi prompt.`
+        },
+        {
+          type: 'text',
+          title: 'I 4 Archetipi del Prompting Metacognitivo',
+          content: `Basandoci sui pattern cognitivi universali, abbiamo identificato 4 stili fondamentali di prompting. Ognuno corrisponde a specifiche combinazioni di tratti di personalità e offre vantaggi unici nell'interazione con l'AI.
+
+**Importante:** Non esiste uno stile "migliore" - l'obiettivo è riconoscere il tuo stile naturale e potenziarlo attraverso la metacognizione.`
+        },
+        {
+          type: 'text',
+          title: '🎯 L\'ESECUTORE - Efficienza e Risultati',
+          content: `**Profilo psicologico:** Alta Coscienziosità + Focus sui risultati
+**Caratteristiche:** Va dritto al punto, prompt concisi, orientato all'azione
+**Punti di forza:** Efficienza, chiarezza, praticità immediata
+**Sfide:** Può perdere sfumature, contesto limitato, creatività ridotta
+
+**Prompt tipico:** 
+"Fammi un riassunto esecutivo di questo documento in 3 punti chiave"
+
+**Pattern di miglioramento:**
+- Aggiungi una domanda di controllo: "Ho fornito abbastanza contesto?"
+- Includi criteri di qualità: "Focus sui 3 aspetti più actionable"
+- Metacognizione: "Cosa potrei star trascurando con questo approccio diretto?"`
+        },
+        {
+          type: 'text', 
+          title: '🌊 L\'ESPLORATORE - Curiosità e Possibilità',
+          content: `**Profilo psicologico:** Alta Apertura + Estroversione intellettuale
+**Caratteristiche:** Curioso, fa molte domande, esplora possibilità multiple
+**Punti di forza:** Creatività, visione ampia, scoperta di connessioni inaspettate
+**Sfide:** Può divagare, difficoltà a concludere, paralisi da analisi
+
+**Prompt tipico:**
+"Quali sono tutte le possibili interpretazioni di questo fenomeno e come si collegano tra loro in contesti diversi?"
+
+**Pattern di miglioramento:**
+- Stabilisci limiti: "Esplorami 3-5 direzioni principali"
+- Includi checkpoint: "Dopo ogni direzione, riassumi il punto chiave"
+- Metacognizione: "Sto esplorando per apprendere o per procrastinare la decisione?"`
+        },
+        {
+          type: 'text',
+          title: '🏗️ IL SISTEMATICO - Struttura e Metodologia', 
+          content: `**Profilo psicologico:** Alta Coscienziosità + Bassa Apertura (preferenza per ordine)
+**Caratteristiche:** Strutturato, metodico, ama framework e procedure
+**Punti di forza:** Organizzazione, completezza, riproducibilità
+**Sfide:** Rigidità, può bloccare creatività, over-engineering
+
+**Prompt tipico:**
+"Analizza questo problema seguendo il framework SWOT, fornendo per ogni quadrante almeno 3 elementi con relative priorità e azioni conseguenti"
+
+**Pattern di miglioramento:**
+- Includi spazio per creatività: "Dopo l'analisi strutturata, suggerisci 1 approccio non convenzionale"
+- Metacognizione: "Questa struttura sta illuminando o limitando la soluzione?"
+- Validazione: "Questo framework è il più adatto per questo specifico problema?"`
+        },
+        {
+          type: 'text',
+          title: '🎨 IL VISIONARIO - Creatività e Innovazione',
+          content: `**Profilo psicologico:** Alta Apertura + Intuizione associativa
+**Caratteristiche:** Associativo, metaforico, cerca soluzioni innovative e non ovvie
+**Punti di forza:** Originalità, pensiero laterale, breakthrough creativi
+**Sfide:** Inconsistenza, può essere vago, difficoltà nell'implementazione
+
+**Prompt tipico:**
+"Immagina che questo problema aziendale sia un ecosistema naturale. Come lo descriveresti, quali sono le dinamiche nascoste e cosa suggerisce per soluzioni biomimetiche?"
+
+**Pattern di miglioramento:**
+- Bilancia con concretezza: "Traducimi questa metafora in 3 azioni pratiche"
+- Metacognizione: "Questa creatività sta generando valore o confusione?"
+- Ancoraggio: "Come posso testare rapidamente questa idea innovativa?"`
+        },
+        {
+          type: 'example',
+          title: 'Stile Misto in Azione',
+          content: `**Scenario:** Devi sviluppare una strategia di marketing
+
+**Esecutore puro:** "Strategia marketing per prodotto X, target Y, budget Z, deliverable in 3 giorni"
+
+**Esecutore metacognitivo:** "Sviluppiamo una strategia marketing per [specifiche]. Prima: questo approccio diretto è adeguato alla complessità del problema? Se servono insight più profondi, iniziamo con 10 minuti di esplorazione, poi focalizziamoci sull'esecuzione"
+
+**Risultato:** Mantieni la tua efficienza naturale ma aggiungi un layer di consapevolezza che previene errori da tunnel vision.`
+        },
+        {
+          type: 'text',
+          title: 'Il Tuo Assessment Personale',
+          content: `**Step 1:** Identifica il tuo stile predominante rispondendo a queste domande:
+
+**Quando affronti un nuovo progetto:**
+A) Definisco subito obiettivi e deadline (Esecutore)
+B) Esploro prima tutte le possibilità (Esploratore)  
+C) Cerco il framework migliore da applicare (Sistematico)
+D) Immagino soluzioni completamente nuove (Visionario)
+
+**Quando scrivi una email importante:**
+A) Vai dritto al punto, massimo 3 frasi
+B) Fornisci contesto e consideri multiple angolazioni
+C) Segui una struttura: contesto-problema-soluzione-azione
+D) Usi analogie o esempi creativi per spiegare
+
+**Quando devi imparare qualcosa di nuovo:**
+A) Cerchi il tutorial più efficiente
+B) Leggi diverse fonti per avere una visione completa
+C) Segui un corso strutturato passo-passo
+D) Sperimenti direttamente e connetti a cose che già conosci`
+        },
+        {
+          type: 'text',
+          title: 'Interpretazione e Sviluppo',
+          content: `**Maggioranza A:** Sei un **Esecutore** - Il tuo superpotere è l'efficienza, la tua sfida è l'ampiezza di vedute
+
+**Maggioranza B:** Sei un **Esploratore** - Il tuo superpotere è la scoperta, la tua sfida è la focalizzazione
+
+**Maggioranza C:** Sei un **Sistematico** - Il tuo superpotere è l'organizzazione, la tua sfida è la flessibilità
+
+**Maggioranza D:** Sei un **Visionario** - Il tuo superpotere è l'innovazione, la tua sfida è l'implementazione
+
+**Mix di stili:** Ottimo! Hai versatilità naturale - impara a scegliere consapevolmente lo stile più adatto al contesto.`
+        },
+        {
+          type: 'warning',
+          title: 'Oltre gli Stereotipi',
+          content: `⚠️ **Importante:** Questi stili non sono "scatole" rigide. Sono **punti di partenza** per la consapevolezza metacognitiva. 
+
+Il vero potere emerge quando:
+- Riconosci il tuo stile naturale
+- Sviluppi competenza negli altri stili  
+- Scegli consapevolmente l'approccio più efficace per ogni situazione
+- Combini stili per risultati superiori`
+        },
+        {
+          type: 'tip',
+          title: 'Il Tuo Piano di Sviluppo Personalizzato',
+          content: `📋 **Basandoti sul tuo stile identificato:**
+
+**Se sei Esecutore:** Aggiungi 30 secondi di "esplorazione controllata" prima di ogni prompt importante
+**Se sei Esploratore:** Imposta timer di 10 minuti per fasi esplorative, poi passa all'azione  
+**Se sei Sistematico:** Dedica il 20% del tempo a sperimentare approcci "non standard"
+**Se sei Visionario:** Chiedi sempre all'AI di "rendere concreto" ogni insight creativo
+
+**Per tutti:** Inizia ogni sessione importante chiedendoti: "Che stile è più adatto a questo obiettivo specifico?"`
         }
       ],
       exercises: [
         {
           id: 'ex-2-1',
-          question: 'Scrivi un prompt che useresti normalmente per chiedere aiuto nella pianificazione di un progetto. Poi analizza: che stile di pensiero riflette?',
+          question: 'Scrivi un prompt che useresti normalmente per chiedere aiuto nella pianificazione di un progetto. Poi analizza: che stile di prompting riflette? Quali elementi del tuo profilo psicologico riconosci?',
           type: 'text',
-          explanation: 'Questo esercizio ti aiuta a prendere consapevolezza del tuo stile naturale di prompting.'
+          explanation: 'Questo esercizio ti aiuta a prendere consapevolezza del tuo stile naturale di prompting e delle sue radici psicologiche.'
+        },
+        {
+          id: 'ex-2-2',
+          question: 'Basandoti sull\'assessment, qual è il tuo stile di prompting predominante?',
+          type: 'multiple-choice',
+          options: [
+            'Esecutore - Efficienza e risultati rapidi',
+            'Esploratore - Curiosità e possibilità multiple', 
+            'Sistematico - Struttura e metodologia',
+            'Visionario - Creatività e innovazione',
+            'Mix equilibrato di più stili'
+          ],
+          correctAnswer: 4, // Non c'è una risposta "corretta" universale
+          explanation: 'Ogni stile ha i suoi punti di forza. L\'importante è riconoscere il tuo pattern naturale per poterlo sviluppare metacognitivamente.'
+        },
+        {
+          id: 'ex-2-3',
+          question: 'Riscrivi il prompt dell\'esercizio 1 integrando elementi di consapevolezza metacognitiva specifici per il tuo stile identificato.',
+          type: 'text',
+          explanation: 'Questo esercizio ti fa praticare l\'applicazione immediata della consapevolezza del tuo stile per migliorare i prompt.'
         }
       ]
     },
