@@ -6,6 +6,7 @@ import { useAuth } from '@/hooks/useAuth'
 import { courseBase } from '@/data/courseBase'
 import { Course, Module } from '@/types/course'
 import { ChevronLeft, ChevronRight, Clock, CheckCircle, Lock, Play, BookOpen, Lightbulb, AlertTriangle } from 'lucide-react'
+import { renderMarkdownParagraphs } from '@/utils/markdownProcessor'
 
 export default function CoursePage() {
   const params = useParams()
@@ -205,11 +206,7 @@ export default function CoursePage() {
                       </div>
                     )}
                     <div className="prose prose-slate dark:prose-invert max-w-none">
-                      {content.content.split('\n').map((paragraph, pIndex) => (
-                        <p key={pIndex} className="mb-4 leading-relaxed text-slate-700 dark:text-slate-300">
-                          {paragraph}
-                        </p>
-                      ))}
+                      {renderMarkdownParagraphs(content.content)}
                     </div>
                     {content.codeExample && (
                       <pre className="bg-slate-800 text-slate-100 p-4 rounded-lg mt-4 overflow-x-auto">

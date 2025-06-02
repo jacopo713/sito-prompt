@@ -230,9 +230,56 @@ Esistono 4 stili principali di thinking prompting:`
 L'AI riconoscerà il pattern "lista numerata + spiegazione" e fornirà una risposta più strutturata e utile.`
         },
         {
-          type: 'warning',
-          title: 'Attenzione ai Bias',
-          content: '⚠️ L\'AI può amplificare bias presenti nei dati di training. Usa prompt che incoraggiano prospettive multiple e pensiero critico.'
+          type: 'text',
+          title: 'Prompt con Gestione del Peso',
+          content: `Una tecnica avanzata è comunicare le priorità attraverso il **contesto e la struttura** del prompt, piuttosto che usando etichette esplicite.
+
+L'AI è abile nel dedurre l'importanza relativa degli elementi dalla loro posizione, ripetizione e formulazione nel prompt.
+
+**Principi chiave:**
+- **Posizione:** Gli elementi più importanti vanno all'inizio
+- **Ripetizione:** I concetti cruciali vengono naturalmente ribaditi
+- **Specificità:** Maggiori dettagli indicano maggiore rilevanza
+- **Contesto emotivo:** Il tono trasmette l'urgenza o l'importanza`
+        },
+        {
+          type: 'example',
+          title: 'Esempio: Prompt Breve e Passivo (Evitare)',
+          content: `"Crea presentazione Q3"
+
+❌ **Problemi di questo approccio:**
+- Troppo generico e vago
+- Nessun contesto sul target audience
+- Manca completamente l'urgenza e l'importanza
+- Non specifica il formato o l'obiettivo
+- L'AI deve "indovinare" tutto`
+        },
+        {
+          type: 'example',
+          title: 'Esempio: Prompt Naturale con Gestione del Peso (Preferire)',
+          content: `Devo creare una presentazione per il board aziendale sui risultati del Q3. È fondamentale che sia altamente professionale perché voglio fare un'ottima impressione. Il board sarà composto da executives senior che si aspettano contenuti di alta qualità, dati precisi e una narrativa coinvolgente.
+
+I risultati Q3 mostrano una crescita del 23% rispetto al Q2, con particolare successo nel segmento enterprise. Vorrei strutturare la presentazione in modo da evidenziare questi successi ma anche affrontare proattivamente le sfide del Q4.
+
+La presentazione deve assolutamente riflettere professionalità e competenza - è un momento cruciale per la mia credibilità con il leadership team.
+
+✅ **Vantaggi di questo approccio:**
+- Suona naturale come una conversazione autentica
+- L'AI deduce le priorità da posizione, ripetizione e contesto
+- Trasmette l'urgenza emotiva senza artifici
+- Fornisce contesto ricco per una risposta mirata`
+        },
+        {
+          type: 'tip',
+          title: 'Come l\'AI Interpreta il Peso',
+          content: `🎯 **L'AI capisce immediatamente che:**
+- La professionalità è la priorità assoluta (ripetuta 3 volte)
+- Il target è senior executives (dettaglio specifico)
+- C'è una componente emotiva importante (impression management)
+- I dati Q3 sono il contenuto principale
+- Il contesto è ad alto stake (credibilità, momento cruciale)
+
+💡 **Risultato:** Una risposta che bilancia perfettamente professionalità, dati concreti e storytelling coinvolgente, senza bisogno di etichette artificiali.`
         }
       ]
     },
