@@ -1,7 +1,6 @@
 import Image from "next/image";
 import AuthButton from "@/components/AuthButton";
 import PurchaseButton from "@/components/PurchaseButton";
-import PromptComparison from "@/components/home/PromptComparison";
 
 export default function Home() {
   return (
@@ -85,6 +84,108 @@ export default function Home() {
             >
               Coaching 1:1
             </a>
+          </div>
+
+          {/* Live Example Section */}
+          <div className="mb-16">
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-8">
+              Esempio Pratico: La Differenza che Fa la Metacognizione
+            </h2>
+            
+            <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+              {/* Prompt Passivo */}
+              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-6 text-left">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-red-100 dark:bg-red-800/30 rounded-full flex items-center justify-center mr-3">
+                    <svg className="w-6 h-6 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-semibold text-red-900 dark:text-red-300">
+                    Prompt Passivo (Base)
+                  </h3>
+                </div>
+                
+                <div className="bg-white/70 dark:bg-slate-800/70 rounded-lg p-4 mb-4">
+                  <p className="text-sm font-mono text-slate-700 dark:text-slate-300">
+                    "Crea un nuovo progetto TypeScript da terminale"
+                  </p>
+                </div>
+                
+                <div className="space-y-2 text-sm">
+                  <p className="text-red-700 dark:text-red-400">
+                    ❌ Troppo generico e vago
+                  </p>
+                  <p className="text-red-700 dark:text-red-400">
+                    ❌ Nessun contesto sul tipo di progetto
+                  </p>
+                  <p className="text-red-700 dark:text-red-400">
+                    ❌ Mancano dettagli su setup e configurazione
+                  </p>
+                  <p className="text-red-700 dark:text-red-400">
+                    ❌ L'AI deve "indovinare" le tue intenzioni
+                  </p>
+                </div>
+              </div>
+
+              {/* Prompt Metacognitivo */}
+              <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-6 text-left">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-green-100 dark:bg-green-800/30 rounded-full flex items-center justify-center mr-3">
+                    <svg className="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-semibold text-green-900 dark:text-green-300">
+                    Prompt Proattivo Metacognitivo
+                  </h3>
+                </div>
+                
+                <div className="bg-white/70 dark:bg-slate-800/70 rounded-lg p-4 mb-4">
+                  <p className="text-sm font-mono text-slate-700 dark:text-slate-300">
+                    "Creiamo un nuovo progetto Next.js con TypeScript da terminale, su sistema operativo Ubuntu con cartella src, Tailwind CSS e Turbopack. Il progetto si chiamerà 'sito-prompt'. 
+                    
+                    Iniziamo con la configurazione base, poi creiamo una pagina di prova per verificare il funzionamento avviando in locale con npm run dev. Infine, proseguiamo con la creazione della homepage.
+                    
+                    Mostra tutti i comandi necessari passo per passo e spiega brevemente cosa fa ogni comando."
+                  </p>
+                </div>
+                
+                <div className="space-y-2 text-sm">
+                  <p className="text-green-700 dark:text-green-400">
+                    ✅ Contesto completo e specifico
+                  </p>
+                  <p className="text-green-700 dark:text-green-400">
+                    ✅ Struttura chiara con fasi definite
+                  </p>
+                  <p className="text-green-700 dark:text-green-400">
+                    ✅ Include verifiche e feedback loop
+                  </p>
+                  <p className="text-green-700 dark:text-green-400">
+                    ✅ Richiede spiegazioni per apprendimento attivo
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Explanation */}
+            <div className="mt-8 max-w-4xl mx-auto">
+              <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6">
+                <h4 className="font-semibold text-blue-900 dark:text-blue-300 mb-3">
+                  💡 La Differenza Metacognitiva
+                </h4>
+                <p className="text-sm text-blue-800 dark:text-blue-300 mb-3">
+                  Il prompt metacognitivo non è solo "più lungo" - è <strong>strategicamente strutturato</strong>:
+                </p>
+                <ul className="space-y-2 text-sm text-blue-800 dark:text-blue-300">
+                  <li>• <strong>Fornisce contesto completo</strong> (OS, framework, strumenti specifici)</li>
+                  <li>• <strong>Definisce chiaramente l'obiettivo</strong> (nome progetto, struttura desiderata)</li>
+                  <li>• <strong>Struttura il processo in fasi</strong> (setup → test → sviluppo)</li>
+                  <li>• <strong>Include verifiche</strong> (npm run dev per testare il funzionamento)</li>
+                  <li>• <strong>Promuove l'apprendimento</strong> (richiede spiegazioni dei comandi)</li>
+                </ul>
+              </div>
+            </div>
           </div>
 
           {/* Developer Quick Access */}
@@ -223,18 +324,13 @@ export default function Home() {
 
           {/* Arrow to next section */}
           <div className="flex justify-center mt-16">
-            <a href="#demo" className="text-slate-400 hover:text-blue-600 transition-colors">
+            <a href="#coaching" className="text-slate-400 hover:text-blue-600 transition-colors">
               <svg className="w-6 h-6 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </svg>
             </a>
           </div>
         </section>
-
-        {/* NUOVA SEZIONE: Prompt Comparison Demo */}
-        <div id="demo">
-          <PromptComparison />
-        </div>
 
         {/* Live Coaching Section */}
         <section id="coaching" className="mt-20 mb-20">
